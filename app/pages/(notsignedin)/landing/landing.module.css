@@ -1,0 +1,17 @@
+.hero {
+  background: url(../../../assets/landingHeroImage.svg);
+  height: calc(100vh - 1px);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+@media only screen and (max-width: 2000px) {
+  .textContainer {
+    width: 40%;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .textContainer {
+    width: 98%;
+  }
+}

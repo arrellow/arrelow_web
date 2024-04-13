@@ -1,0 +1,11 @@
+.hero {
+  background: url(../../assets//signUpBg.svg);
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.active {
+  border-bottom: 2px solid #023c63; /* Change the color to whatever you want */
+}
