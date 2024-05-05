@@ -40,6 +40,27 @@ const SignUp = () => {
             htmlFor=""
             className="pb-3 text-[14px] font-bold leading-[20px]"
           >
+            username
+          </label>
+          <TextField
+            control={control}
+            name="username"
+            placeholder="Enter username *"
+            type="text"
+            rules={{
+              required: {
+                value: true,
+                message: "username is reuired",
+              },
+            }}
+            className="mb-5 border-[1px] border-[#D1D1D5]"
+          />
+        </div>{" "}
+        <div>
+          <label
+            htmlFor=""
+            className="pb-3 text-[14px] font-bold leading-[20px]"
+          >
             Enter Email
           </label>
           <TextField
@@ -91,7 +112,27 @@ const SignUp = () => {
             className="mb-5 border-[1px] border-[#D1D1D5]"
           />
         </div>
-
+        <div>
+          <label
+            htmlFor=""
+            className="pb-3 text-[14px] font-bold leading-[20px]"
+          >
+            Phone Number
+          </label>
+          <TextField
+            control={control}
+            name="phone"
+            type="text"
+            placeholder="Enter Phone Number *"
+            rules={{
+              required: {
+                value: true,
+                message: "phone number is reuired",
+              },
+            }}
+            className="mb-5 border-[1px] border-[#D1D1D5]"
+          />
+        </div>{" "}
         <Button
           variant="add"
           type="submit"
@@ -100,7 +141,6 @@ const SignUp = () => {
           text={isSubmitting ? "Loading....." : "Sign Up"}
           className="mt-6 w-[100%] rounded-none"
         />
-
         <p className="pt-5 text-center font-bold leading-[20px] text-[#023C63]">
           Forgot your password?
         </p>
