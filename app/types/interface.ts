@@ -20,6 +20,8 @@ export interface TextFieldProps {
 }
 
 export interface Inputs {
+  username: string;
   email: string;
   password: string;
+  phone_number: string;
 }

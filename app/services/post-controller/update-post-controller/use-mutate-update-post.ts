@@ -4,14 +4,18 @@ import axiosAuth from "@/app/utils/http-client";
 interface IProps {
   // TODO: remove any type and put the righ one
   requestPayload: any;
+  Id: number;
 }
 
-export default function useMutateSignup() {
+export default function useMutateUpdatePost() {
   const Mutation = useMutation({
-    mutationFn: async ({ requestPayload }: any) => {
+    mutationFn: async ({ requestPayload, Id }: IProps) => {
       try {
         let res: any;
-        res = await axiosAuth.post("/api/auth/register", requestPayload);
+        res = await axiosAuth.patch(
+          `/api/post/update/${Id}/66207b7b1b0f0cba371015b2`,
+          requestPayload,
+        );
         return res;
       } catch (error) {
         return Promise.reject(error);

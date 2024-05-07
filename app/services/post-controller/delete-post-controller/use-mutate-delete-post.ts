@@ -6,12 +6,14 @@ interface IProps {
   requestPayload: any;
 }
 
-export default function useMutateSignup() {
+export default function useMutateDeletePost() {
   const Mutation = useMutation({
-    mutationFn: async ({ requestPayload }: any) => {
+    mutationFn: async ({ requestPayload }: IProps) => {
       try {
         let res: any;
-        res = await axiosAuth.post("/api/auth/register", requestPayload);
+        res = await axiosAuth.delete(
+          "/api/post/delete/{{userId}}/677818819900110",
+        );
         return res;
       } catch (error) {
         return Promise.reject(error);

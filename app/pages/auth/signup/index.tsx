@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { AxiosError } from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { signIn } from "next-auth/react";
@@ -16,6 +17,7 @@ import Apple from "@/app/assets/myApple.svg";
 import Google from "@/app/assets/devicon_google.svg";
 import FB from "@/app/assets/Facebook.svg";
 import { Inputs } from "@/app/types/interface";
+import useMutateSignup from "@/app/services/auth-controller/signup-controller/use-mutate-signup";
 
 const SignUp = () => {
   const router = useRouter();
@@ -26,10 +28,19 @@ const SignUp = () => {
     formState: { isSubmitting },
     control,
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    toast.success("Sign Up Successful");
-    router.push("/pages/dashboard");
-    console.log(data);
+  const signupMutation = useMutateSignup();
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const res = await signupMutation.mutateAsync(data);
+      console.log(res);
+      toast.success("Sign Up Successful");
+      router.push("/pages/dashboard");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error);
+        toast.error(error?.response?.data?.messages);
+      }
+    }
   };
 
   return (
@@ -121,7 +132,7 @@ const SignUp = () => {
           </label>
           <TextField
             control={control}
-            name="phone"
+            name="phone_number"
             type="text"
             placeholder="Enter Phone Number *"
             rules={{

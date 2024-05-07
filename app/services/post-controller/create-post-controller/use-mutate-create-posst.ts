@@ -6,12 +6,12 @@ interface IProps {
   requestPayload: any;
 }
 
-export default function useMutateSignup() {
+export default function useMutateCreatePost() {
   const Mutation = useMutation({
-    mutationFn: async ({ requestPayload }: any) => {
+    mutationFn: async ({ requestPayload }: IProps) => {
       try {
         let res: any;
-        res = await axiosAuth.post("/api/auth/register", requestPayload);
+        res = await axiosAuth.post("/api/post/create", requestPayload);
         return res;
       } catch (error) {
         return Promise.reject(error);

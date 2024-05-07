@@ -6,7 +6,7 @@ interface IProps {
   requestPayload: any;
 }
 
-export default function useMutateLogin() {
+export default function useMutateDeleteUser() {
   const Mutation = useMutation({
     mutationFn: async ({ requestPayload }: IProps) => {
       try {
