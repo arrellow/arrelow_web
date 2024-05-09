@@ -6,12 +6,14 @@ interface IParameters {
   [key: string]: any;
 }
 
-export default function useGeAllPost(requestParams: IParameters = {}) {
+export default function useGeAllRecommendedPost(
+  requestParams: IParameters = {},
+) {
   const result = useQuery({
     queryKey: [QueryKeys.GET_POST, requestParams],
     queryFn: async () => {
       try {
-        const res = await axiosAuth.get("/api/post", {
+        const res = await axiosAuth.get("/api/post/recommend", {
           params: {
             ...requestParams,
           },

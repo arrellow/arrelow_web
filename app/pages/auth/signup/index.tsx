@@ -29,7 +29,7 @@ const SignUp = () => {
   }
   const options: optType[] = [
     { value: "agent", label: "Agent / Landlord" },
-    { value: "buyer", label: "Buyer / Renter" },
+    { value: "user", label: "Buyer / Renter" },
   ];
 
   const {

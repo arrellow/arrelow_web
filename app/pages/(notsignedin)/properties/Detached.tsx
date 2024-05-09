@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -10,9 +9,10 @@ import Car from "@/app/assets/car.svg";
 import El from "@/app/assets/el.svg";
 import useGeAllPost from "@/app/services/post-controller/all-post-controller/use-get-all-post";
 
-const RecentlyAdded = () => {
+const Detached = () => {
   const router = useRouter();
-  const { data: post, isLoading } = useGeAllPost();
+  const { data: post, isLoading } = useGeAllPost({ category: "bungalow" });
+  console.log(post);
   const handleClick = (Id: any) => {
     router.push(`/pages/properties/${Id}`);
   };
@@ -86,4 +86,4 @@ const RecentlyAdded = () => {
   );
 };
 
-export default RecentlyAdded;
+export default Detached;

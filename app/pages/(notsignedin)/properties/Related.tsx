@@ -2,10 +2,11 @@
 import React, { useState } from "react";
 import Button from "@/app/components/ui/buttons";
 import RecentlyAdded from "./RecentlyAdded";
+import Detached from "./Detached";
 
 const MENU = [
   { text: "All", content: <RecentlyAdded /> },
-  { text: "Detached", content: <RecentlyAdded /> },
+  { text: "Detached", content: <Detached /> },
   { text: "Duplex", content: <RecentlyAdded /> },
   { text: "Terraces", content: <RecentlyAdded /> },
   { text: "Bungalow", content: <RecentlyAdded /> },
