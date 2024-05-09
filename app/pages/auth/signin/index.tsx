@@ -4,7 +4,7 @@ import Image from "next/image";
 import { signIn } from "next-auth/react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useAuthStore from "@/app/store";
+import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import Button from "@/app/components/ui/buttons";
@@ -12,7 +12,8 @@ import TextField from "@/app/components/ui/inputs/custominput";
 import Apple from "@/app/assets/myApple.svg";
 import Google from "@/app/assets/devicon_google.svg";
 import FB from "@/app/assets/Facebook.svg";
-import { Inputs } from "@/app/types/interface";
+import { loginInput } from "@/app/types/interface";
+import useMutateLogin from "@/app/services/auth-controller/login-controller/use-mutate-login";
 
 const Login = () => {
   const router = useRouter();
@@ -21,11 +22,22 @@ const Login = () => {
     handleSubmit,
     formState: { isSubmitting },
     control,
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    toast.success("Login Successful");
-    router.push("/pages/dashboard");
-    console.log(data);
+  } = useForm<loginInput>();
+  const loginMutation = useMutateLogin();
+
+  const onSubmit: SubmitHandler<loginInput> = async (data) => {
+    console.log("my data is", data);
+    try {
+      const res = await loginMutation.mutateAsync(data);
+      console.log(res);
+      toast.success(res?.message);
+      router.push("/pages/dashboard");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error);
+        toast.error(error?.response?.data?.message);
+      }
+    }
   };
   return (
     <form action="" onSubmit={handleSubmit(onSubmit)}>
@@ -73,21 +85,20 @@ const Login = () => {
                 value: true,
                 message: "password is reuired",
               },
-              minLength: {
-                value: 8,
-                message: "Password must be at least 8 characters long",
-              },
-              pattern: {
-                value:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"|,.<>?]).*$/,
-                message:
-                  "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
-              },
+              // minLength: {
+              //   value: 4,
+              //   message: "Password must be at least 4 characters long",
+              // },
+              // pattern: {
+              //   value:
+              //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"|,.<>?]).*$/,
+              //   message:
+              //     "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+              // },
             }}
             className="mb-5 border-[1px] border-[#D1D1D5]"
           />
         </div>
-
         <Button
           variant="add"
           type="submit"

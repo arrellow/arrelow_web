@@ -8,7 +8,7 @@ interface IProps {
 
 export default function useMutateSignup() {
   const Mutation = useMutation({
-    mutationFn: async ({ requestPayload }: any) => {
+    mutationFn: async (requestPayload : any) => {
       try {
         let res: any;
         res = await axiosAuth.post("/api/auth/register", requestPayload);

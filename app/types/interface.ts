@@ -24,4 +24,10 @@ export interface Inputs {
   email: string;
   password: string;
   phone_number: string;
+  role: string;
+}
+
+export interface loginInput {
+  password: string;
+  email: string;
 }

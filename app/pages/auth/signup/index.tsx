@@ -18,18 +18,29 @@ import Google from "@/app/assets/devicon_google.svg";
 import FB from "@/app/assets/Facebook.svg";
 import { Inputs } from "@/app/types/interface";
 import useMutateSignup from "@/app/services/auth-controller/signup-controller/use-mutate-signup";
+import Selecfield from "@/app/components/ui/inputs/selectinput";
 
 const SignUp = () => {
   const router = useRouter();
 
+  interface optType {
+    value: string;
+    label: string;
+  }
+  const options: optType[] = [
+    { value: "agent", label: "Agent / Landlord" },
+    { value: "buyer", label: "Buyer / Renter" },
+  ];
+
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
     control,
   } = useForm<Inputs>();
   const signupMutation = useMutateSignup();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    console.log(data);
     try {
       const res = await signupMutation.mutateAsync(data);
       console.log(res);
@@ -38,20 +49,42 @@ const SignUp = () => {
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error);
-        toast.error(error?.response?.data?.messages);
+        toast.error(error?.response?.data?.message);
       }
     }
   };
 
   return (
     <form action="" onSubmit={handleSubmit(onSubmit)}>
+      <ToastContainer />
       <div>
         <div>
           <label
             htmlFor=""
             className="pb-3 text-[14px] font-bold leading-[20px]"
           >
-            username
+            Fullname
+          </label>
+          <TextField
+            control={control}
+            name="fullname"
+            placeholder="Enter Fullname *"
+            type="text"
+            rules={{
+              required: {
+                value: true,
+                message: "fullname is reuired",
+              },
+            }}
+            className="mb-2 border-[1px] border-[#D1D1D5]"
+          />
+        </div>{" "}
+        <div>
+          <label
+            htmlFor=""
+            className="pb-3 text-[14px] font-bold leading-[20px]"
+          >
+            Username
           </label>
           <TextField
             control={control}
@@ -64,34 +97,9 @@ const SignUp = () => {
                 message: "username is reuired",
               },
             }}
-            className="mb-5 border-[1px] border-[#D1D1D5]"
+            className="mb-2 border-[1px] border-[#D1D1D5]"
           />
         </div>{" "}
-        <div>
-          <label
-            htmlFor=""
-            className="pb-3 text-[14px] font-bold leading-[20px]"
-          >
-            Enter Email
-          </label>
-          <TextField
-            control={control}
-            name="email"
-            placeholder="Enter email *"
-            type="text"
-            rules={{
-              required: {
-                value: true,
-                message: "Email is reuired",
-              },
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Please enter a valid email address",
-              },
-            }}
-            className="mb-5 border-[1px] border-[#D1D1D5]"
-          />
-        </div>
         <div>
           <label
             htmlFor=""
@@ -128,6 +136,31 @@ const SignUp = () => {
             htmlFor=""
             className="pb-3 text-[14px] font-bold leading-[20px]"
           >
+            Enter Email
+          </label>
+          <TextField
+            control={control}
+            name="email"
+            placeholder="Enter email *"
+            type="text"
+            rules={{
+              required: {
+                value: true,
+                message: "Email is reuired",
+              },
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Please enter a valid email address",
+              },
+            }}
+            className="mb-2 border-[1px] border-[#D1D1D5]"
+          />
+        </div>
+        <div>
+          <label
+            htmlFor=""
+            className="pb-3 text-[14px] font-bold leading-[20px]"
+          >
             Phone Number
           </label>
           <TextField
@@ -141,9 +174,40 @@ const SignUp = () => {
                 message: "phone number is reuired",
               },
             }}
-            className="mb-5 border-[1px] border-[#D1D1D5]"
+            className="mb-2 border-[1px] border-[#D1D1D5]"
           />
         </div>{" "}
+        <div>
+          <label
+            htmlFor=""
+            className="pb-3 text-[14px] font-bold leading-[20px]"
+          >
+            Services Offered
+          </label>
+          <Controller
+            control={control}
+            name="role"
+            rules={{
+              required: {
+                value: true,
+                message: "role is reuired",
+              },
+            }}
+            render={({ field: { onChange, onBlur, value, ref } }) => (
+              <Selecfield
+                value={options.find((c) => c.value === value)}
+                onChange={(val: any) => onChange(val.value)}
+                options={options}
+                className=""
+              />
+            )}
+          />
+          {errors.role && (
+            <span className="text-xs text-red-500">
+              {errors?.role?.message}
+            </span>
+          )}
+        </div>
         <Button
           variant="add"
           type="submit"

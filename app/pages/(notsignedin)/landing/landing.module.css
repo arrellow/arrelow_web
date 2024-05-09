@@ -1,6 +1,6 @@
 .hero {
   background: url(../../../assets/landingHeroImage.svg);
-  height: calc(100vh - 1px);
+  height: calc(100vh - 10px);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

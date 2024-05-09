@@ -10,10 +10,8 @@ interface searchProps {
 const Hero = () => {
   const { register, handleSubmit, control } = useForm<searchProps>();
   return (
-    <div className={`px-4 pb-10 pt-60 md:px-20 md:pt-64 ${styles.hero}`}>
-      <div
-        className={`${styles.textContainer} w-full tracking-wider`}
-      >
+    <div className={`px-4 pb-10 pt-40 md:px-20 md:pt-40 ${styles.hero}`}>
+      <div className={`${styles.textContainer} w-full tracking-wider`}>
         <h1 className="text-[32px] font-bold leading-[56px] tracking-[1px] text-[#023C63] md:text-[47px]">
           One Stop to Finding a Perfect Property with{" "}
           <span className="text-[#67C8FD]">Arellow Homes.</span>

@@ -8,11 +8,11 @@ interface IProps {
 
 export default function useMutateLogin() {
   const Mutation = useMutation({
-    mutationFn: async ({ requestPayload }: IProps) => {
+    mutationFn: async (requestPayload: any) => {
       try {
         let res: any;
         res = await axiosAuth.post("/api/auth/login", requestPayload);
-        return res;
+        return res?.data;
       } catch (error) {
         return Promise.reject(error);
       }
