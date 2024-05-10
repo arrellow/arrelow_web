@@ -32,6 +32,7 @@ import ArrowUp from "@/app/assets/arrowup.svg";
 import ArrowDown from "@/app/assets/arrowdown.svg";
 import Prof from "@/app/assets/prof.svg";
 import MyTextArea from "@/app/components/ui/inputs/textarea";
+import useGeSinglePost from "@/app/services/post-controller/single-post-controller/use-get-single-post";
 
 interface carouselProps {
   id: number;
@@ -69,6 +70,10 @@ interface searchProps {
 
 const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
   const { register, handleSubmit, control } = useForm<searchProps>();
+  console.log(params.propertyId);
+  const { data: post, isLoading } = useGeSinglePost(params.propertyId);
+  console.log(post);
+
   return (
     <div className="pt-40">
       <section className="flex h-[700px] w-full flex-col md:flex-row">

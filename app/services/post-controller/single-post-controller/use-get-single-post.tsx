@@ -6,19 +6,12 @@ interface IParameters {
   [key: string]: any;
 }
 
-export default function useGeSinglePost(requestParams: IParameters = {}) {
+export default function useGeSinglePost(Id: any) {
   const result = useQuery({
-    queryKey: [QueryKeys.GET_POST, requestParams],
+    queryKey: [QueryKeys.GET_POST],
     queryFn: async () => {
       try {
-        const res = await axiosAuth.get(
-          "/api/post/info/66207b7b1b0f0cba371015b2",
-          {
-            params: {
-              ...requestParams,
-            },
-          },
-        );
+        const res = await axiosAuth.get(`/api/post/info/${Id}`);
         return res?.data?.data;
       } catch (error) {
         return Promise.reject(error);

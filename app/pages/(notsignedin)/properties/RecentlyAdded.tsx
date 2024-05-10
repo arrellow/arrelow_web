@@ -23,7 +23,7 @@ const RecentlyAdded = () => {
           <div
             key={idx}
             className=" w-[95%] cursor-pointer md:w-[23%]"
-            onClick={() => handleClick(idx)}
+            onClick={() => handleClick(item?.id)}
           >
             <Card
               isBackground

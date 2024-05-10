@@ -14,6 +14,7 @@ import Google from "@/app/assets/devicon_google.svg";
 import FB from "@/app/assets/Facebook.svg";
 import { loginInput } from "@/app/types/interface";
 import useMutateLogin from "@/app/services/auth-controller/login-controller/use-mutate-login";
+import Link from "next/link";
 
 const Login = () => {
   const router = useRouter();
@@ -108,9 +109,12 @@ const Login = () => {
           className="mt-6 w-[100%] rounded-none"
         />
 
-        <p className="pt-5 text-center font-bold leading-[20px] text-[#023C63]">
+        <Link
+          href="auth/forgot-password"
+          className="pt-5 text-center font-bold leading-[20px] text-[#023C63]"
+        >
           Forgot your password?
-        </p>
+        </Link>
       </div>
       <div>
         <p className="pb-4 pt-6 text-center">Or connect with:</p>
