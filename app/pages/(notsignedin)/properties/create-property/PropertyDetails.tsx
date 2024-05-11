@@ -70,7 +70,7 @@ const PropertyDetails = () => {
                 value={options.find((c) => c.value === value)}
                 onChange={(val: any) => onChange(val.value)}
                 options={options}
-                className=""
+                className="border-[1px] border-[#948D8D] bg-[#F6F4F4]"
               />
             )}
           />
@@ -98,7 +98,7 @@ const PropertyDetails = () => {
                 message: "fullname is reuired",
               },
             }}
-            className="mb-2 border-[1px] border-[#D1D1D5]"
+            className="mb-2  border-[1px] border-[#948D8D] bg-[#F6F4F4]"
           />
         </div>
         <div>
@@ -123,6 +123,7 @@ const PropertyDetails = () => {
                 placeholder="Short descriptions with house features*"
                 cols={20}
                 rows={5}
+                className="border-[1px] border-[#948D8D] bg-[#F6F4F4]"
                 value={value}
                 onBlur={onBlur}
                 onChange={onChange}
@@ -151,7 +152,7 @@ const PropertyDetails = () => {
                 value={options.find((c) => c.value === value)}
                 onChange={(val: any) => onChange(val.value)}
                 options={options}
-                className=""
+                className="border-[1px] border-[#948D8D] bg-[#F6F4F4]"
               />
             )}
           />
@@ -179,7 +180,7 @@ const PropertyDetails = () => {
                 message: "fullname is reuired",
               },
             }}
-            className="mb-2 border-[1px] border-[#D1D1D5]"
+            className="mb-2 border-[1px] border-[#948D8D] bg-[#F6F4F4]"
           />
         </div>
         <div>
@@ -200,9 +201,9 @@ const PropertyDetails = () => {
                 message: "fullname is reuired",
               },
             }}
-            className="mb-2 border-[1px] border-[#D1D1D5]"
+            className="mb-2 border-[1px] border-[#948D8D] bg-[#F6F4F4]"
           />
-        </div>{" "}
+        </div>
         <div>
           <label
             htmlFor=""
@@ -221,9 +222,9 @@ const PropertyDetails = () => {
                 message: "fullname is reuired",
               },
             }}
-            className="mb-2 border-[1px] border-[#D1D1D5]"
+            className="mb-2 border-[1px] border-[#948D8D] bg-[#F6F4F4]"
           />
-        </div>{" "}
+        </div>
         <div>
           <label
             htmlFor=""
@@ -242,7 +243,7 @@ const PropertyDetails = () => {
                 message: "fullname is reuired",
               },
             }}
-            className="mb-2 border-[1px] border-[#D1D1D5]"
+            className="mb-2 border-[1px] border-[#948D8D] bg-[#F6F4F4]"
           />
         </div>{" "}
         <div>
@@ -263,7 +264,7 @@ const PropertyDetails = () => {
                 message: "fullname is reuired",
               },
             }}
-            className="mb-2 border-[1px] border-[#D1D1D5]"
+            className="mb-2 border-[1px] border-[#948D8D] bg-[#F6F4F4]"
           />
         </div>
         <div>
@@ -284,7 +285,7 @@ const PropertyDetails = () => {
                 message: "fullname is reuired",
               },
             }}
-            className="mb-2 border-[1px] border-[#D1D1D5]"
+            className="mb-2 border-[1px] border-[#948D8D] bg-[#F6F4F4]"
           />
         </div>{" "}
         <div className="flex w-full items-center justify-between">

@@ -8,6 +8,7 @@ interface TextAreaProps {
   rows?: number; // optional number of rows
   onBlur: () => void;
   value: any;
+  className: string;
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
@@ -18,6 +19,7 @@ const MyTextArea: React.FC<TextAreaProps> = ({
   onChange,
   onBlur,
   value,
+  className,
 }) => {
   return (
     <textarea
@@ -27,7 +29,7 @@ const MyTextArea: React.FC<TextAreaProps> = ({
       value={value}
       onBlur={onBlur}
       onChange={onChange}
-      className="border-[#D1D1D5] border-[1px] pl-2 pt-2 w-full"
+      className={`"border-[#D1D1D5] w-full border-[1px] pl-2 pt-2 ${className}`}
     ></textarea>
   );
 };
