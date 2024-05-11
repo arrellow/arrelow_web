@@ -32,7 +32,7 @@ const ChangePassword = () => {
   const loginMutation = useMutateLogin();
 
   const onSubmit: SubmitHandler<changePassword> = async (data) => {
-    if (data?.password === data.confirmPassword) {
+    if (data?.password !== data.confirmPassword) {
       toast.error("Passwords do not match");
     }
     setIsSuccessModalOpen(true);

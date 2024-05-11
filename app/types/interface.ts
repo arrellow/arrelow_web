@@ -39,3 +39,15 @@ export interface changePassword {
   password: string;
   confirmPassword: string;
 }
+export interface propertyDetailsProps {
+  category: string;
+  title: string;
+  description: string;
+  bathroom: string;
+  bedroom: string;
+  feature: string;
+  location: string;
+  floor: string;
+  square: string;
+  price: string;
+}
