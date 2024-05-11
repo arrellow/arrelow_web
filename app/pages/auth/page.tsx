@@ -3,15 +3,10 @@ import React from "react";
 import Image from "next/image";
 import useAuthStore from "@/app/store";
 import { useRouter } from "next/navigation";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { useForm} from "react-hook-form";
 import { IoCloseSharp } from "react-icons/io5";
 import { useState } from "react";
 import styles from "./auth.module.css";
-import Button from "@/app/components/ui/buttons";
-import TextField from "@/app/components/ui/inputs/custominput";
-import Apple from "@/app/assets/myApple.svg";
-import Google from "@/app/assets/devicon_google.svg";
-import FB from "@/app/assets/Facebook.svg";
 import SignUp from "./signup";
 import Login from "./signin";
 

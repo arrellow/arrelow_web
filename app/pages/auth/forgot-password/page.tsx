@@ -12,16 +12,6 @@ import { useState } from "react";
 import { Modal } from "@/app/components/ui/modal";
 
 const ForgotPassword = () => {
-  let [isOpen, setIsOpen] = useState(false);
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
   const router = useRouter();
   const {
     register,
@@ -32,7 +22,7 @@ const ForgotPassword = () => {
   const forgotPasswordMutation = useMutateForgotPassword();
 
   const onSubmit: SubmitHandler<forgotPasswordProps> = async (data) => {
-    setIsOpen(true);
+    router.push("change-password");
     // console.log("my data is", data);
     // try {
     //   const res = await forgotPasswordMutation.mutateAsync(data);
@@ -95,15 +85,12 @@ const ForgotPassword = () => {
               type="submit"
               size="md"
               disabled={false}
-              text={isSubmitting ? "Loading....." : "Request"}
+              text={isSubmitting ? "Loading....." : "Request Reset Link"}
               className="mt-6 w-[100%] rounded-none"
             />
           </div>
         </main>
       </form>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-        Hello
-      </Modal>
     </main>
   );
 };

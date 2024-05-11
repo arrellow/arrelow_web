@@ -34,3 +34,8 @@ export interface loginInput {
 export interface forgotPasswordProps {
   email: string;
 }
+
+export interface changePassword {
+  password: string;
+  confirmPassword: string;
+}
