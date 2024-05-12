@@ -51,3 +51,31 @@ export interface propertyDetailsProps {
   square: string;
   price: string;
 }
+
+// POST INTERFACE
+
+export interface IPost {
+  id?: string;
+  category?: string;
+  title?: string;
+  description?: string;
+  features?: string[];
+  amenities?: string[];
+  property_location?: string;
+  number_of_bedrooms?: number;
+  number_of_bathrooms?: number;
+  number_of_floors?: number;
+  square?: number;
+  price?: number;
+  banner?: string | any;
+  images?: string[];
+  videos?: string[];
+  virtual_tour?: string;
+  views?: number;
+  status?: "selling" | "sold";
+  userId?: string;
+  user?: {};
+  createdAt?: typeof Date;
+
+  chats?: [];
+}

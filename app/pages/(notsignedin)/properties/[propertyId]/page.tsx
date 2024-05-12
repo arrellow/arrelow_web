@@ -33,6 +33,7 @@ import ArrowDown from "@/app/assets/arrowdown.svg";
 import Prof from "@/app/assets/prof.svg";
 import MyTextArea from "@/app/components/ui/inputs/textarea";
 import useGeSinglePost from "@/app/services/post-controller/single-post-controller/use-get-single-post";
+import { IPost } from "@/app/types/interface";
 
 interface carouselProps {
   id: number;
@@ -88,6 +89,7 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
             <Image src={Image3} alt="" className="h-full w-full object-cover" />
           </div>
         </main>
+        {/* {post?.images[0]} */}
       </section>
 
       <section className=" flex h-[250px] items-center bg-[#023C63]">
@@ -121,17 +123,19 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
       </section>
 
       <section className="mx-auto w-[92%]">
-        <p className="leading-[40px]">Listed by Alice Realty</p>
+        <p className="leading-[40px]">
+          Listed by {post?.product_detail?.user?.username}
+        </p>
 
         <main className="flex flex-col justify-between md:flex-row">
           <div className="w-[90%] md:w-[47%]">
             <section className="flex flex-col gap-y-4">
               <h1 className="text-3xl font-semibold">
-                4 Bedroom Semi-Detached Duplex With BQ
+                {post?.product_detail?.title}
               </h1>
               <div className="flex gap-4">
                 <Image src={Location} alt="" />
-                <p>123, Somewhere in Ajah, Lagos, Nigeria.</p>
+                <p>{post?.product_detail?.property_location}</p>
               </div>
               <div className="flex items-center gap-4">
                 <Image src={Star} alt="" />
@@ -143,11 +147,11 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
               <div className="flex items-center gap-6">
                 <div className="flex items-center gap-2">
                   <Image src={Eye} alt="" />
-                  <p>22 views</p>
+                  <p>{post?.product_detail?.views} views</p>
                 </div>{" "}
                 <div className="flex items-center gap-2">
                   <Image src={Calender} alt="" />
-                  <p>Jan 09, 2024</p>
+                  <p>{post?.product_detail?.createdAt}</p>
                 </div>
               </div>
             </section>
@@ -157,76 +161,45 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
               <div className="flex flex-col items-center gap-4">
                 <p>Bedroom</p>
                 <Image src={Car2} alt="" />
-                <h1>1 Rooms</h1>
+                <h1>{post?.product_detail?.number_of_bedrooms} Rooms</h1>
               </div>
               <div className="flex flex-col items-center gap-4">
                 <p>Bathroom</p>
                 <Image src={Cart2} alt="" />
-                <h1>4 Baths</h1>
+                <h1>{post?.product_detail?.number_of_bathrooms} Baths</h1>
               </div>
               <div className="flex flex-col items-center gap-4">
                 <p>Square</p>
                 <Image src={El2} alt="" />
-                <h1>500 m²</h1>
+                <h1>{post?.product_detail?.square} m²</h1>
               </div>
               <div className="flex flex-col items-center gap-4">
                 <p>Floors</p>
                 <Image src={Floor} alt="" />
-                <h1>1</h1>
+                <h1>{post?.product_detail?.number_of_floors}</h1>
               </div>
             </section>
             <section className="flex flex-col gap-y-5 pt-10">
               <h1 className="text-3xl font-semibold">Description</h1>
               <p className="leading-[28px]">
-                A REWARDING ESCAPE PEACEFULLY SITUATED: Luxurious and upgraded,
-                this 4 bedroom, 4.5 bathroom home of 5,281 sq. ft. (including
-                poolhouse, per independent third-party measurement) rests on a
-                lot of 1.23 acres (per county) on a peaceful cul-de-sac in the
-                Lakeside neighborhood. Richly-appointed spaces include large
-                gathering areas, a bright, professional-grade kitchen,
-                spectacular dining room, two walk-out master suites, and a home
-                theater. Contemporary amenities include solar PV and a Tesla EV
-                charging station. The expansive backyard includes a sparkling
-                pool and spa plus a comfortable poolhouse all in private,
-                verdant surroundings.{" "}
+                {post?.product_detail?.description}
               </p>
             </section>
             <section>
               <h1>Features</h1>
               <section className="min-h-[200px] shadow-xlarge">
                 <div className="flex flex-wrap items-center gap-y-8 pl-6 pt-14">
-                  <div className="flex w-[22%] items-center gap-1">
-                    <Image src={Tick} alt="" />
-                    <p>Oven</p>
-                  </div>{" "}
-                  <div className="flex w-[22%] items-center gap-1">
-                    <Image src={Tick} alt="" />
-                    <p>CCTV</p>
-                  </div>{" "}
-                  <div className="flex w-[22%] items-center gap-1">
-                    <Image src={Tick} alt="" />
-                    <p>Jacuzzi</p>
-                  </div>{" "}
-                  <div className="flex w-[22%] items-center gap-1">
-                    <Image src={Tick} alt="" />
-                    <p>Fully fitted Kitchen</p>
-                  </div>{" "}
-                  <div className="flex w-[22%] items-center gap-1">
-                    <Image src={Tick} alt="" />
-                    <p>Microwave</p>
-                  </div>{" "}
-                  <div className="flex w-[22%] items-center gap-1">
-                    <Image src={Tick} alt="" />
-                    <p>Video Bell</p>
-                  </div>{" "}
-                  <div className="flex w-[22%] items-center gap-1">
-                    <Image src={Tick} alt="" />
-                    <p>Water heater</p>
-                  </div>{" "}
-                  <div className="flex w-[22%] items-center gap-1">
-                    <Image src={Tick} alt="" />
-                    <p>Pop ceiling</p>
-                  </div>
+                  {post?.product_detail?.features.map(
+                    (item: string, idx: number) => (
+                      <div
+                        key={idx}
+                        className="flex w-[22%] items-center gap-1"
+                      >
+                        <Image src={Tick} alt="" />
+                        <p>{item}</p>
+                      </div>
+                    ),
+                  )}
                 </div>
               </section>
             </section>
@@ -312,6 +285,7 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
                       <MyTextArea
                         placeholder="Message *"
                         cols={30}
+                        className=""
                         rows={10}
                         value={value}
                         onBlur={onBlur}
@@ -346,60 +320,14 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
       <section className="mx-auto mt-8 w-[92%] px-6 pb-14 pt-12 shadow-xlarge ">
         <h1 className="pb-8 text-3xl font-semibold">Amenities</h1>
         <div className="flex flex-wrap gap-x-10 gap-y-11">
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            Swimming pool
-          </p>{" "}
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            School Community
-          </p>{" "}
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            Community Hospital
-          </p>{" "}
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            24 Hours security
-          </p>{" "}
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            CCTV protection
-          </p>{" "}
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            Gymnasium
-          </p>{" "}
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            Resident park
-          </p>{" "}
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            Serviced apartment
-          </p>{" "}
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            Sport facility
-          </p>{" "}
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            Parking space
-          </p>{" "}
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            Pantry
-          </p>{" "}
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            Good title document
-          </p>{" "}
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            Good Neighbourhood
-          </p>{" "}
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            Beautiful ensuite rooms
-          </p>{" "}
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            Housekeeping services
-          </p>{" "}
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            Excellent location
-          </p>{" "}
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            Fully Fitted kitchen
-          </p>{" "}
-          <p className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center">
-            24 hours electricity
-          </p>
+          {post?.product_detail?.amenities?.map((item: string, idx: number) => (
+            <p
+              className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center"
+              key={idx}
+            >
+              {item}
+            </p>
+          ))}
         </div>
       </section>
 
@@ -562,6 +490,7 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
         </div>
       </section>
       <section className=" relative  px-6 pb-14 pt-12">
+        <h1 className="text-3xl font-extrabold">Related Properties</h1>
         <Carousel
           swipeable={false}
           draggable={false}
@@ -582,30 +511,32 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
           {/* <div className="float-right mr-7 mt-5 flex h-[30px] w-[100px] items-center justify-center bg-[#2C9FD9] text-base font-semibold text-white">
             For Sale
           </div> */}
-          {CarouselContent.map((item) => (
+          {post?.related_properties.map((item: IPost) => (
             <div key={item.id} className="mx-2 h-full bg-[#F2F9FB] px-4 py-4 ">
               <Image
-                src={item.image}
+                src={item.banner}
                 alt=""
                 className="h-[600px] w-full object-cover"
               />
               <div className="min-h-[100px] bg-[#F2F9FB] pt-3">
-                <p>Semi Detached Duplex</p>
-                <h1 className="text-[16px] font-semibold">
-                  4 Bedroom Semi- Detached Duplex With...
-                </h1>
-                <p>Lagos</p>
+                <p>{item?.category}</p>
+                <h1 className="text-[16px] font-semibold">{item?.title}</h1>
+                <p>{item?.property_location}</p>
                 <div className=" inner inset text-black-0 flex h-[50px] w-full items-center gap-5  pl-4 text-sm">
                   <div className="flex items-center gap-1">
-                    <p className="font-sm text-base">4</p>
+                    <p className="font-sm text-base">
+                      {item?.number_of_bedrooms}
+                    </p>
                     <Image src={Car2} height={20} width={20} alt="" />
                   </div>
                   <div className="flex items-center gap-1">
-                    <p className="font-sm text-base">4</p>
+                    <p className="font-sm text-base">
+                      {item?.number_of_bathrooms}
+                    </p>
                     <Image src={Cart2} height={20} width={20} alt="" />
                   </div>
                   <div className="flex items-center gap-1">
-                    <p>500 m²</p>
+                    <p>{item?.square} m²</p>
                     <Image src={El2} height={20} width={20} alt="" />
                   </div>
                 </div>

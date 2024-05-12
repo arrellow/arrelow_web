@@ -8,6 +8,7 @@ import Cart from "@/app/assets/cart.svg";
 import Car from "@/app/assets/car.svg";
 import El from "@/app/assets/el.svg";
 import useGeAllPost from "@/app/services/post-controller/all-post-controller/use-get-all-post";
+import { beautify } from "@/app/utils/helper";
 
 const RecentlyAdded = () => {
   const router = useRouter();
@@ -36,7 +37,7 @@ const RecentlyAdded = () => {
               <div className="absolute bottom-0 w-full rounded-small">
                 <div className="flex">
                   <div className="flex h-[35px] w-[120px] items-center justify-center bg-[#023C63] text-center text-white">
-                    <span>{item?.price}</span>
+                    <span>&#8358;{beautify(item.price)}</span>
                   </div>
                   <div className="flex h-[35px] w-[120px] items-center justify-center rounded-tr-[33.42px] bg-[#FEFEFE] text-center">
                     <span>{item?.category}</span>

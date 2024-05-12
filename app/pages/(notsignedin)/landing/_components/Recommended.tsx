@@ -8,6 +8,7 @@ import SignInBar from "@/app/assets/scrollingImage.svg";
 import Love from "@/app/assets/love.svg";
 import Location from "@/app/assets/location.svg";
 import Cart from "@/app/assets/cart.svg";
+import { beautify } from "@/app/utils/helper";
 import { Card } from "@/app/components/cards";
 import useGeAllRecommendedPost from "@/app/services/post-controller/all-recommended-controller/use-get-all-recommended";
 
@@ -101,7 +102,7 @@ const Recommended = () => {
                     <div className="absolute bottom-0  w-full rounded-small">
                       <div className="flex">
                         <div className="flex h-[35px] w-[120px] items-center justify-center bg-[#023C63] text-center text-white">
-                          <span>{item.price}</span>
+                          <span>&#8358;{beautify(item.price)}</span>
                         </div>
                         <div className="flex h-[35px] w-[120px] items-center justify-center rounded-tr-[33.42px] bg-[#FEFEFE] text-center">
                           <span>{item.category}</span>
