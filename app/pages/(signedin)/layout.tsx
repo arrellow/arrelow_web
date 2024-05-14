@@ -3,6 +3,7 @@ import Nav from "./components/Nav";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Montserrat } from "next/font/google";
+import SideBar from "./components/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 const montserrat = Montserrat({ subsets: ["latin"] });
@@ -21,11 +22,18 @@ export default function RootLayout({
     <html lang="en">
       <body className={montserrat.className}>
         <div className="h-screen overflow-hidden">
-          <Nav />
-          <div className="no-scrollbar h-full overflow-scroll ">
-            {children}
-            <Footer />
+          <div>
+            <Nav />
           </div>
+          <section className="flex h-full">
+            <div className="w-[15%]">
+              <SideBar />
+            </div>
+            <div className="no-scrollbar h-full overflow-scroll ">
+              {children}
+              <Footer />
+            </div>
+          </section>
         </div>
       </body>
     </html>
