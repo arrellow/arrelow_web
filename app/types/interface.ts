@@ -1,3 +1,5 @@
+import { Interface } from "readline";
+
 export interface ButtonProps {
   size: any;
   type?: any;
@@ -78,4 +80,11 @@ export interface IPost {
   createdAt?: typeof Date;
 
   chats?: [];
+}
+
+export interface MessageProps {
+  messageHeader: string;
+  messageParagraph: string;
+  messageTime: string;
+  messageRead: string;
 }

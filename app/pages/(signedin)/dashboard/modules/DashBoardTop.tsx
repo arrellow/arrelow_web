@@ -10,7 +10,7 @@ import SmallCard from "../components/SmallCard";
 
 const DashBoardTop = () => {
   return (
-    <main className=" mt-7 border-2 border-black px-7 py-7">
+    <main className=" mb-12 mt-7 border-2 border-black px-7 py-7">
       <section className="mt-6 flex items-center justify-between ">
         <WildCard
           cardText="Properties"

@@ -20,10 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <div>
+        <div className="h-screen overflow-hidden">
           <Nav />
-          {children}
-          <Footer />
+          <div className="no-scrollbar h-full overflow-scroll ">
+            {children}
+            <Footer />
+          </div>
         </div>
       </body>
     </html>
