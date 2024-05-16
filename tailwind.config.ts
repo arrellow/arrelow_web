@@ -13,6 +13,9 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        primary: "#023C63",
+      },
       borderRadius: {
         custom: "0px 33.42px 0px 0px",
         small: "0px 0px 35.18px 35.18px",

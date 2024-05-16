@@ -14,14 +14,14 @@ const SideBar = () => {
       link: "/pages/dashboard",
     },
     {
-      name: "Finance Matching",
+      name: "View profile",
       icon: <IoChatboxEllipsesOutline />,
-      link: "/funding/finance-matching",
+      link: "/pages/profile",
     },
     {
-      name: "Marketplace",
+      name: "Media",
       icon: <GrHomeRounded />,
-      link: "/funding/marketplace",
+      link: "/pages/media",
     },
     {
       name: "Inbox",

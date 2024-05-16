@@ -5,7 +5,7 @@ import DashboardBottom from "./modules/DashboardBottom";
 
 const Dashboard = () => {
   return (
-    <main className="   bg-[#FAF9FF] pb-28 pt-20  ">
+    <main className="   mx-auto w-[90%] bg-[#FAF9FF] pb-28   ">
       <h1 className="text-4xl font-extrabold leading-10">Dashboard</h1>
       <DashBoardTop />
       <DashboardBottom />

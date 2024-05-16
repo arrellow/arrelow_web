@@ -10,7 +10,7 @@ import ArrowBlue from "@/app/assets/arrowBlue.svg";
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col px-20 pt-24 max-sm:py-8  md:flex-row md:justify-around">
+    <footer className="flex flex-col  pt-24 max-sm:py-8  md:flex-row md:justify-around">
       <div className=" ">
         <Image src={Logo} alt="logo" />
         <div className="pt-4 text-sm leading-[40px] ">

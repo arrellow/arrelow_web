@@ -29,8 +29,8 @@ export default function RootLayout({
             <div className="w-[15%]">
               <SideBar />
             </div>
-            <div className="no-scrollbar h-full overflow-scroll ">
-              {children}
+            <div className="no-scrollbar  h-full w-[85%] overflow-scroll ">
+              <div className="pt-20">{children}</div>
               <Footer />
             </div>
           </section>
