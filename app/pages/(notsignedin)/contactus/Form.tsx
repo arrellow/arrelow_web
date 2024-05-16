@@ -82,6 +82,7 @@ const Form = () => {
                   value={value}
                   onBlur={onBlur}
                   onChange={onChange}
+                  className=""
                 />
               )}
             />

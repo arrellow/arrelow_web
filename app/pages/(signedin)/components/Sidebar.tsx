@@ -34,19 +34,9 @@ const SideBar = () => {
       link: "/pages/pages",
     },
     {
-      name: "Inbox",
+      name: "Your Profile",
       icon: <IoChatboxEllipsesOutline />,
-      link: "/funding/inbox",
-    },
-    {
-      name: "Inbox",
-      icon: <IoChatboxEllipsesOutline />,
-      link: "/funding/inbox",
-    },
-    {
-      name: "Inbox",
-      icon: <IoChatboxEllipsesOutline />,
-      link: "/funding/inbox",
+      link: "/pages/my-profile",
     },
   ];
   const [activeIdx, setActiveIdx] = useState(-1);

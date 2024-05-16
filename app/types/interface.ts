@@ -96,3 +96,10 @@ export interface MessagePropsWithStats {
   messageRead: string;
   status: Status;
 }
+export interface CheckboxProps {
+  id?: string;
+  checked?: boolean;
+  className?: string;
+  text: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
