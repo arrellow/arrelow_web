@@ -1,13 +1,16 @@
+"use client";
+import React from "react";
 import { createColumnHelper } from "@tanstack/react-table";
 import { MessageData } from "@/app/lib/constants";
 import Table from "@/app/components/tables/Table";
+import Header from "./header";
 
-const DAshboardBottom = () => {
+const Property = () => {
   const columnHelper = createColumnHelper();
   const columns = [
     {
       accessorKey: "serialNumber",
-      header: "#",
+      header: "ID",
       cell: ({ row }: any) => {
         const serialNumber = row.index + 1;
         return <span className="font-bold uppercase">{serialNumber}</span>;
@@ -15,25 +18,20 @@ const DAshboardBottom = () => {
       enableHiding: false,
     },
     columnHelper.accessor("messageHeader", {
-      header: "Name Of Organizatiin",
+      header: "URL",
     }),
     columnHelper.accessor("messageParagraph", {
-      header: "Organization Description",
-    }),
-    columnHelper.accessor("messageRead", {
-      header: "Organization Description",
+      header: "VIEWS",
     }),
   ];
-
   return (
-    <div className="mt-12">
-      <Table
-        data={MessageData}
-        columns={columns}
-        className="border-primary border-[1px]"
-      />
-    </div>
+    <main className="border-primary mx-auto w-[90%] border-[1px]">
+      <Header />
+      <section>
+        <Table data={MessageData} columns={columns} />
+      </section>
+    </main>
   );
 };
 
-export default DAshboardBottom;
+export default Property;

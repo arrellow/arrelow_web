@@ -7,7 +7,7 @@ import {
   getFilteredRowModel,
 } from "@tanstack/react-table";
 
-const Table = ({ columns, data }: any) => {
+const Table = ({ columns, data, className }: any) => {
   const [filtering, setFiltering] = useState("");
   const table = useReactTable({
     data,
@@ -28,7 +28,7 @@ const Table = ({ columns, data }: any) => {
         onChange={(e: any) => setFiltering(e.target.value)}
       /> */}
       <table
-        className={`min-h-[600px] w-full border-2 border-black ${styles.table} `}
+        className={` min-h-[600px] w-full  ${styles.table} ${className} `}
       >
         <thead className="px-4">
           {table.getHeaderGroups().map((headerGroup) => {

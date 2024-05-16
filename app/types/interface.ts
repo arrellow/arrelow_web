@@ -1,4 +1,5 @@
 import { Interface } from "readline";
+import { Status } from "./enum";
 
 export interface ButtonProps {
   size: any;
@@ -87,4 +88,11 @@ export interface MessageProps {
   messageParagraph: string;
   messageTime: string;
   messageRead: string;
+}
+export interface MessagePropsWithStats {
+  messageHeader: string;
+  messageParagraph: string;
+  messageTime: string;
+  messageRead: string;
+  status: Status;
 }

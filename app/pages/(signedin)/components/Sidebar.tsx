@@ -24,14 +24,14 @@ const SideBar = () => {
       link: "/pages/media",
     },
     {
-      name: "Inbox",
+      name: "Properties",
       icon: <IoChatboxEllipsesOutline />,
-      link: "/funding/inbox",
+      link: "/pages/property",
     },
     {
-      name: "Inbox",
+      name: "Pages",
       icon: <IoChatboxEllipsesOutline />,
-      link: "/funding/inbox",
+      link: "/pages/pages",
     },
     {
       name: "Inbox",
