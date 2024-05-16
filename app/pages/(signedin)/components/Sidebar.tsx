@@ -46,18 +46,18 @@ const SideBar = () => {
   };
 
   return (
-    <div className="border-r-gray-light min-h-screen w-full  border-2 bg-[#023C63] pl-4 pr-4 pt-7 text-white ">
+    <div className="border-r-gray-light min-h-screen w-full  border-2 bg-[#023C63]  pt-7 text-white ">
       {/* <div className="pb-7 pt-7">
         <Image src={Logo} alt="" />
       </div> */}
-      <ul className="flex h-screen flex-col justify-around">
+      <ul className="flex h-screen flex-col  justify-around">
         {navList.map((menu, idx) => (
           <div
             key={idx}
             onClick={() => handleMenuItemClick(idx)}
-            className={`cursor-pointer ${idx === activeIdx ? "bg-opacity-50 text-white" : ""} rounded-xl `}
+            className={`cursor-pointer ${idx === activeIdx ? "bg-[#D9D9D933]  text-white" : ""} rounded-xl py-5 `}
           >
-            <div className="flex items-center gap-4">
+            <div className="flex  items-center gap-4 pl-3">
               <p>{menu.icon}</p>
               <Link href={menu.link}>
                 <li>{menu.name}</li>
