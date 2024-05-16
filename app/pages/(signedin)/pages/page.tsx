@@ -47,16 +47,16 @@ const Pages = () => {
       header: "Actions",
       cell: ({ row }: any) => {
         return (
-          <div className="flex space-x-2 text-[24px]">
+          <div className="flex space-x-2 text-[15px]">
             <button
               // onClick={() => editRow(row.original.id)} // Assuming each row has a unique 'id' field
-              className="text-blue-600 hover:text-blue-800"
+              className="flex h-[30px] w-[30px] items-center justify-center bg-blue-600 text-white hover:text-blue-800"
             >
               <FaRegEdit />
             </button>
             <button
               // onClick={() => deleteRow(row.original.id)}
-              className="text-red-600 hover:text-red-800"
+              className="flex h-[30px] w-[30px] items-center justify-center bg-red-600 text-white hover:text-red-800"
             >
               <FaTrash />
             </button>
