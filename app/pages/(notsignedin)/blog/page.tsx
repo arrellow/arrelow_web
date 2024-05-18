@@ -14,7 +14,7 @@ const Blog = () => {
       </header>
       <main>
         <ItemCard />
-        <Pagination />
+       
         <Subscribe />
       </main>
     </div>

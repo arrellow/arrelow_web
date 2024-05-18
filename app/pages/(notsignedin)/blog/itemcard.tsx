@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import Blog1 from "@/app/assets/blog1.svg";
 import Blog2 from "@/app/assets/blog2.svg";
 import Blog3 from "@/app/assets/blog3.svg";
@@ -10,6 +10,7 @@ import Blog6 from "@/app/assets/blog6.svg";
 import Profile from "@/app/assets/profile.svg";
 import CustomImage from "@/app/assets/customimageblog.svg";
 import Image from "next/image";
+import Pagination from "@/app/components/ui/pagination";
 interface CardProps {
   img: string;
   customImage: string;
@@ -80,21 +81,89 @@ export const Card: CardProps[] = [
       "Rat Infestation in the Home: How to Get Rid of Them and Protect Your Homes",
     profile: Profile,
   },
+  {
+    id: 1,
+    img: Blog1,
+    customImage: CustomImage,
+    date: "Jan 09, 2024",
+    header: "4 Bedroom Detached Duplex With BQ For Sale",
+    topic:
+      "Rat Infestation in the Home: How to Get Rid of Them and Protect Your Homes",
+    profile: Profile,
+  },
+  {
+    id: 2,
+    img: Blog2,
+    customImage: CustomImage,
+    date: "Jan 09, 2024",
+    header: "4 Bedroom Detached Duplex With BQ For Sale",
+    topic:
+      "Rat Infestation in the Home: How to Get Rid of Them and Protect Your Homes",
+    profile: Profile,
+  },
+  {
+    id: 3,
+    img: Blog3,
+    customImage: CustomImage,
+    date: "Jan 09, 2024",
+    header: "4 Bedroom Detached Duplex With BQ For Sale",
+    topic:
+      "Rat Infestation in the Home: How to Get Rid of Them and Protect Your Homes",
+    profile: Profile,
+  },
+  {
+    id: 4,
+    img: Blog1,
+    customImage: CustomImage,
+    date: "Jan 09, 2024",
+    header: "4 Bedroom Detached Duplex With BQ For Sale",
+    topic:
+      "Rat Infestation in the Home: How to Get Rid of Them and Protect Your Homes",
+    profile: Profile,
+  },
+  {
+    id: 5,
+    img: Blog5,
+    customImage: CustomImage,
+    date: "Jan 09, 2024",
+    header: "4 Bedroom Detached Duplex With BQ For Sale",
+    topic:
+      "Rat Infestation in the Home: How to Get Rid of Them and Protect Your Homes",
+    profile: Profile,
+  },
+  {
+    id: 6,
+    img: Blog6,
+    customImage: CustomImage,
+    date: "Jan 09, 2024",
+    header: "4 Bedroom Detached Duplex With BQ For Sale",
+    topic:
+      "Rat Infestation in the Home: How to Get Rid of Them and Protect Your Homes",
+    profile: Profile,
+  },
 ];
 
 const ItemCard = () => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 6;
+  const totalPages = Math.ceil(Card?.length / itemsPerPage);
+  const currentData = Card?.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage,
+  );
+
   const router = useRouter();
   const handleClick = (blogId: any) => {
     router.push(`/pages/blog/${blogId}`);
   };
   return (
     <div>
-      <div className="flex flex-wrap justify-between gap-y-10 md:px-24">
-        {Card.map((item, idx) => (
+      <div className="grid gap-y-16 md:grid-cols-3 md:px-24">
+        {currentData.map((item, idx) => (
           <div
             key={idx}
             onClick={() => handleClick(item.id)}
-            className="min-h-[300px] cursor-pointer shadow-large md:w-[32%]"
+            className="min-h-[300px] cursor-pointer shadow-large"
           >
             <div>
               <Image
@@ -115,6 +184,11 @@ const ItemCard = () => {
           </div>
         ))}
       </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 };
