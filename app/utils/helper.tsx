@@ -12,3 +12,10 @@ export const beautify = (n: number) =>
       ["", " thousand", " million", " billion", " tillion"][
         (Math.log10(n) / 3) | 0
       ];
+
+export const getFirstLetter = (name: string) => {
+  if (!name) {
+    throw new Error("Name cannot be empty");
+  }
+  return name.charAt(0);
+};

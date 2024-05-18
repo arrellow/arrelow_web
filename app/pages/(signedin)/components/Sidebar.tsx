@@ -39,7 +39,7 @@ const SideBar = () => {
       link: "/pages/my-profile",
     },
   ];
-  const [activeIdx, setActiveIdx] = useState(-1);
+  const [activeIdx, setActiveIdx] = useState(0);
 
   const handleMenuItemClick = (idx: any) => {
     setActiveIdx(idx);

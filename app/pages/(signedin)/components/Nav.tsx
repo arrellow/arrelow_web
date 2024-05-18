@@ -2,17 +2,30 @@
 import React from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react"; // Import useSession
-import { signOut } from "next-auth/react";
+import { getCookie } from "typescript-cookie";
+import LandingLogo from "@/app/assets/landingLogo.svg";
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
-import useAuthStore from "@/app/store";
+import SearchInput from "@/app/components/molecules/searchinput";
+import { getFirstLetter } from "@/app/utils/helper";
+import TextField from "@/app/components/ui/inputs/custominput";
+import { FaArrowRightLong } from "react-icons/fa6";
 import useMutateLogout from "@/app/services/auth-controller/logout-controller/use-mutate-logout";
 
 const Nav = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
+  const user = getCookie("user");
+  let userDetails;
+  if (user) {
+    userDetails = JSON.parse(user);
+  } else {
+    userDetails = null; // or handle the case when user is undefined appropriately
+  }
+  console.log("my user detail is", userDetails);
+  const first_letter = getFirstLetter(userDetails?.data?.username);
   // console.log("My session is", session);
   const logOutMutation = useMutateLogout();
   console.log(logOutMutation);
@@ -33,13 +46,45 @@ const Nav = () => {
   return (
     <div>
       <ToastContainer />
-      <section className="flex justify-between">
-        <button onClick={onSubmit} type="submit">
+      <section className="flex items-center justify-between px-9">
+        <div>
+          <Image
+            src={LandingLogo}
+            alt="logo"
+            className=" max-sm:h-[50px] max-sm:w-[90px]"
+            height={50}
+            width={150}
+          />
+        </div>
+        <div className="flex items-center gap-3 text-base font-extrabold">
+          <p>Property Detail</p>
+          <FaArrowRightLong />
+        </div>
+        <div>
+          <TextField
+            name="text"
+            placeholder="enter your search term"
+            type="text"
+            rules={{
+              required: {
+                value: true,
+                message: "Matric Number is reuired",
+              },
+            }}
+            className="my-0 h-[36px] w-[95%] rounded-lg border-[1px] border-black"
+          />
+        </div>
+        {/* <button onClick={onSubmit} type="submit">
           Log out
-        </button>
-        <div className="flex items-center gap-4">
-          <h1> {session?.user?.name}</h1>
-          {session?.user?.image && (
+        </button> */}
+        <div className="flex items-center gap-6">
+          <h1>
+            Welcome
+            <span className="pl-3">
+              {session ? session?.user?.name : userDetails?.data?.username}
+            </span>
+          </h1>
+          {session?.user?.image ? (
             <Image
               src={session?.user?.image}
               alt="profile"
@@ -47,6 +92,12 @@ const Nav = () => {
               width={100}
               className="h-[30px] w-[30px] rounded-[50%]"
             />
+          ) : (
+            <div className="flex h-[60px] w-[60px] items-center justify-center rounded-[50%] border-2 border-black">
+              <p className="text-3xl font-extrabold capitalize">
+                {first_letter}
+              </p>
+            </div>
           )}
         </div>
       </section>

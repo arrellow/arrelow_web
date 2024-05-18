@@ -8,7 +8,7 @@ import { useState } from "react";
 interface TextFieldProps {
   asterik?: boolean;
   type?: string;
-  control: Control<any>;
+  control?: Control<any>;
   name: string;
   rules?: object;
   className?: string;

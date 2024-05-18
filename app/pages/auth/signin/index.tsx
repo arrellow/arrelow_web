@@ -15,6 +15,7 @@ import FB from "@/app/assets/Facebook.svg";
 import { loginInput } from "@/app/types/interface";
 import useMutateLogin from "@/app/services/auth-controller/login-controller/use-mutate-login";
 import Link from "next/link";
+import { setCookie } from "typescript-cookie";
 
 const Login = () => {
   const router = useRouter();
@@ -30,8 +31,8 @@ const Login = () => {
     console.log("my data is", data);
     try {
       const res = await loginMutation.mutateAsync(data);
-      console.log(res);
       toast.success(res?.message);
+      setCookie("user", JSON.stringify(res));
       router.push("/pages/dashboard");
     } catch (error) {
       if (error instanceof AxiosError) {

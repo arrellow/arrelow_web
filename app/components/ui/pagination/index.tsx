@@ -1,11 +1,11 @@
 import React from "react";
 import { FaArrowRight } from "react-icons/fa";
-import styles from "./blog.module.css";
+import styles from "./style.module.css";
 
 const Pagination = () => {
   return (
     <div
-      className={`item-center mt-14 flex gap-5 justify-center text-center ${styles.circle}`}
+      className={`item-center mt-14 flex justify-center gap-5 text-center ${styles.circle}`}
     >
       <div className="bg-[#023c63] text-white">1</div>
       <div>2</div>

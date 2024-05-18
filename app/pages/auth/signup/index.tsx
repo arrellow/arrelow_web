@@ -5,18 +5,15 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
-import useAuthStore from "@/app/store";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { IoCloseSharp } from "react-icons/io5";
-import { useState } from "react";
-import styles from "../auth.module.css";
 import Button from "@/app/components/ui/buttons";
 import TextField from "@/app/components/ui/inputs/custominput";
 import Apple from "@/app/assets/myApple.svg";
 import Google from "@/app/assets/devicon_google.svg";
 import FB from "@/app/assets/Facebook.svg";
 import { Inputs } from "@/app/types/interface";
+import { setCookie } from "typescript-cookie";
 import useMutateSignup from "@/app/services/auth-controller/signup-controller/use-mutate-signup";
 import Selecfield from "@/app/components/ui/inputs/selectinput";
 
@@ -43,7 +40,7 @@ const SignUp = () => {
     console.log(data);
     try {
       const res = await signupMutation.mutateAsync(data);
-      console.log(res);
+      setCookie("user", JSON.stringify(res));
       toast.success("Sign Up Successful");
       router.push("/pages/dashboard");
     } catch (error) {
