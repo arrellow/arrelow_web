@@ -13,9 +13,12 @@ import { getFirstLetter } from "@/app/utils/helper";
 import TextField from "@/app/components/ui/inputs/custominput";
 import { FaArrowRightLong } from "react-icons/fa6";
 import useMutateLogout from "@/app/services/auth-controller/logout-controller/use-mutate-logout";
+import { IoSearchOutline } from "react-icons/io5";
+import { useForm } from "react-hook-form";
 
 const Nav = () => {
   const router = useRouter();
+  const { register, handleSubmit, control } = useForm();
   const { data: session, status } = useSession();
   const user = getCookie("user");
   let userDetails;
@@ -60,19 +63,21 @@ const Nav = () => {
           <p>Property Detail</p>
           <FaArrowRightLong />
         </div>
-        <div>
+        <div className="relative">
           <TextField
             name="text"
             placeholder="enter your search term"
             type="text"
+            control={control}
             rules={{
               required: {
                 value: true,
                 message: "Matric Number is reuired",
               },
             }}
-            className="my-0 h-[36px] w-[95%] rounded-lg border-[1px] border-black"
+            className=" h-[36px] w-[500px] rounded-lg border-[1px] border-black"
           />
+          <IoSearchOutline className="absolute right-4 top-3" />
         </div>
         {/* <button onClick={onSubmit} type="submit">
           Log out
