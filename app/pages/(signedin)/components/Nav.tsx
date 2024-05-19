@@ -22,13 +22,18 @@ const Nav = () => {
   const { data: session, status } = useSession();
   const user = getCookie("user");
   let userDetails;
-  if (user) {
-    userDetails = JSON.parse(user);
-  } else {
-    userDetails = null; // or handle the case when user is undefined appropriately
+  if (typeof window !== "undefined") {
+    const user = getCookie("user");
+    if (user) {
+      userDetails = JSON.parse(user);
+    } else {
+      userDetails = null;
+    }
   }
   console.log("my user detail is", userDetails);
-  const first_letter = getFirstLetter(userDetails?.data?.username);
+  const first_letter = userDetails
+    ? getFirstLetter(userDetails?.data?.username)
+    : "";
   // console.log("My session is", session);
   const logOutMutation = useMutateLogout();
   console.log(logOutMutation);

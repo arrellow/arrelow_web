@@ -32,7 +32,9 @@ const Login = () => {
     try {
       const res = await loginMutation.mutateAsync(data);
       toast.success(res?.message);
-      setCookie("user", JSON.stringify(res));
+ if (typeof window !== "undefined") {
+         setCookie("user", JSON.stringify(res));
+       }
       router.push("/pages/dashboard");
     } catch (error) {
       if (error instanceof AxiosError) {
