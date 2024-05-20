@@ -91,7 +91,7 @@ const Recommended = () => {
               </div>
               {isLoading ? (
                 "data is loading"
-              ) : post.length > 0 ? (
+              ) : post?.length > 0 ? (
                 post?.map((item: any, idx: any) => (
                   <div key={idx}>
                     <Card
