@@ -103,3 +103,11 @@ export interface CheckboxProps {
   text: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
+export interface InputsContactUs {
+  fullname: string;
+  phone_number: string;
+  email: string;
+  message: string;
+  requestPayload: any;
+}

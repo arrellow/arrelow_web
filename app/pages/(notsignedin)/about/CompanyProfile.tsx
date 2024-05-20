@@ -4,7 +4,7 @@ const CompanyProfile = () => {
   return (
     <div className="pt-24">
       <header>
-        <h1>1. COMPANY PROFILE</h1>
+        <h1 className="pb-3 font-bold">COMPANY PROFILE</h1>
       </header>
       <p>
         Arellow Homes is a pioneering real estate company in Nigeria,

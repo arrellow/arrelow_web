@@ -9,7 +9,7 @@ const BlogId = ({ params }: { params: { blogId: string } }) => {
   const card = Card.find((item) => item.id === parseInt(params.blogId));
   console.log({ card });
   return (
-    <div className="pt-36 md:px-20">
+    <div className="pt-36 md:px-20 px-4">
       <div>
         {card ? (
           <div>

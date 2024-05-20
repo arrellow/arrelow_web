@@ -4,16 +4,29 @@ import Button from "@/app/components/ui/buttons";
 import arrow from "@/app/assets/arrowup.svg";
 import Image from "next/image";
 import BlogEditor from "./BlogEditor";
+import { CheckCard } from "@/app/components/checker-card";
+import styles from "./createblog.module.css"
 
 const Blog = () => {
   const greyBg: string = "bg-[#f6f4f4] text-[#948d8d] p-3 border-[0.5px] border-[#948D8D] rounded-[10px]"
-  
-  const [openPub, setOpenPub] = useState<boolean>(false)
-  const [openTag, setOpenTag] = useState<boolean>(false)
-  const [openCat, setOpenCat] = useState<boolean>(false)
-  // const [title, setTitle] = useState<string>("")
+
+  interface CheckedCard {
+    title: string;
+    options: any;
+
+  }
+  const tags: CheckedCard = {
+    title: "Tags",
+    options: ["Real Estate", "Real Estate", "Real Estate", "Real Estate", "Real Estate"]
+  }
+  const categories: CheckedCard = {
+    title: "Categories",
+    options: ["Real Estate", "Real Estate", "Real Estate", "Real Estate", "Real Estate"]
+  }
+
 
   const [blogBody, setBlogBody] = useState<string>("")
+  const [title, setTitle] = useState<string>("")
   return (
     <div className="pt-28 px-[5rem]">
       <header className="text-center ">
@@ -30,7 +43,7 @@ const Blog = () => {
         <div className="flex justify-between gap-8 flex-col md:flex-row">
           <div className="md:w-[60%] flex flex-col gap-8">
           <h2 className="font-bold text-[28px] leading-[24px] pb-4">ADD NEW POST</h2>
-            <input type="text" name="" id="title" placeholder="Enter Title here" className={`${greyBg} w-full px-8 flex justify-between`}/>
+            <input type="text" name="" id="title" placeholder="Enter Title here" className={`${greyBg} w-full px-8 flex justify-between`} value={title} onChange={(e) => setTitle(e.target.value)}/>
             <BlogEditor blogBody={blogBody} setBlogBody={setBlogBody} />
             
             <div className={`${greyBg} w-full px-8 flex justify-between`}>
@@ -61,28 +74,7 @@ const Blog = () => {
               <button className="text-white bg-[#023C63] h-[50px] w-[50%] px-8 rounded-[10px]">Publish</button>
             </div>
 
-            <div className="border-[1.5px] p-3 border-[#948D8D] rounded-[10px]">
-               <div className="flex justify-between border-b border-[#D1D1D5] py-3 px-8">
-              <p className="text-black font-semibold text-[22px]">Tags</p>
-              <Image src={arrow} alt="" />
-              </div>
-              <div className="flex justify-between w-[90%] m-auto p-3">
-                <p className="text-[#345ECB]">All Tags</p>
-                <p>Most used</p>
-              </div>
-
-              <div className="border-[1.5px] border-[#948D8D] p-[28px] rounded-[10px]">
-                <label><input type="checkbox" name="" id="" className="p-8 my-3" /><span className="ml-4">Real Estate</span></label><br />
-                <label><input type="checkbox" name="" id="" className="p-8 my-3"/><span className="ml-4">Real Estate</span></label><br />
-                <label><input type="checkbox" name="" id="" className="p-8 my-3" /><span className="ml-4">Real Estate</span></label><br />
-                <label><input type="checkbox" name="" id="" className="p-8 my-3" /><span className="ml-4">Real Estate</span></label><br />
-                <label><input type="checkbox" name="" id="" className="p-8 my-3" /><span className="ml-4">Real Estate</span></label><br />
-
-                 <button className= {`${greyBg} flex items-center h-[50px]`}>
-                  <span className="text-[2rem] mr-3">+ </span> ADD NEW
-                </button>
-              </div>
-           </div>
+            <CheckCard head={tags} />
             <div className="border-[1.5px] p-3 border-[#948D8D] rounded-[10px]">
                <div className="flex justify-between border-b border-[#D1D1D5] py-3 px-8">
               <p className="text-black font-semibold text-[22px]">Featured Image</p>
@@ -90,55 +82,14 @@ const Blog = () => {
               </div>
               <div className="flex justify-between p-3">
                 <p className="text-[#345ECB]">Set featured Image</p>
-                <p>Most used</p>
               </div>
-           </div>
-            <div className="border-[1.5px] p-3 border-[#948D8D] rounded-[10px]">
-               <div className="flex justify-between border-b border-[#D1D1D5] py-3 px-8">
-              <p className="text-black font-semibold text-[22px]">Categories</p>
-              <Image src={arrow} alt="" />
-              </div>
-              <div className="flex justify-between w-[90%] m-auto p-3">
-                <p className="text-[#345ECB]">All Categories</p>
-                <p>Most used</p>
-              </div>
+            </div>
 
-              <div className="border-[1.5px] border-[#948D8D] p-[28px] rounded-[10px]">
-                
-                <label><input type="checkbox" name="" id="" className="p-8 my-3" /><span className="ml-4">Real Estate</span></label><br />
-                <label><input type="checkbox" name="" id="" className="p-8 my-3"/><span className="ml-4">Real Estate</span></label><br />
-                <label><input type="checkbox" name="" id="" className="p-8 my-3" /><span className="ml-4">Real Estate</span></label><br />
-                <label><input type="checkbox" name="" id="" className="p-8 my-3" /><span className="ml-4">Real Estate</span></label><br />
-                <label><input type="checkbox" name="" id="" className="p-8 my-3" /><span className="ml-4">Real Estate</span></label><br />
-
-                 <button className={`${greyBg} flex items-center h-[50px]`}>
-                  <span className="text-[2rem] mr-3">+ </span> ADD NEW
-                </button>
-              </div>
-           </div>
+            <CheckCard head={ categories} />
           </div>
         </div>
       </main>
-      {/* <main>
-        <ItemCard />
-        <Pagination />
-        <Subscribe />
-      </main> */}
     </div>
-    // return (
-    //   <div className="pt-28">
-    //     <header className="text-center ">
-    //       <h1 className="font-bold text-[28px] leading-[24px] pb-4">Blog Page</h1>
-    //       <p className="py-5 pb-8">
-    //         We bring you helpful news and articles about real estate.
-    //       </p>
-    //     </header>
-    //     <main>
-    //       <ItemCard />
-    //       <Pagination />
-    //       <Subscribe />
-    //     </main>
-    //   </div>
   );
 };
 
