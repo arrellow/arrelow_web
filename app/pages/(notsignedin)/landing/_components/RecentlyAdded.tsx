@@ -26,7 +26,7 @@ const RecentlyAdded = () => {
       <div className="flex flex-wrap justify-around gap-y-5  overflow-hidden py-10 ">
         {isLoading ? (
           "Data is loading"
-        ) : post.length > 0 ? (
+        ) : post?.length > 0 ? (
           post?.map((item: any, idx: any) => (
             <div
               key={idx}

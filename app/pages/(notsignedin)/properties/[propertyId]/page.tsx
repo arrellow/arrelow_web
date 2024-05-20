@@ -72,7 +72,14 @@ interface searchProps {
 const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
   const { register, handleSubmit, control } = useForm<searchProps>();
   console.log(params.propertyId);
-  const { data: post, isLoading } = useGeSinglePost(params.propertyId);
+  const { data: post, isLoading } = useGeSinglePost(params?.propertyId);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!post) {
+    return <div>No data available</div>;
+  }
   console.log(post);
 
   return (
@@ -110,7 +117,7 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
           itemClass="carousel-item-padding-40-px"
           className="h-[200px] px-9"
         >
-          {CarouselContent.map((item) => (
+          {CarouselContent?.map((item) => (
             <div key={item.id} className=" mx-1 h-full">
               <Image
                 src={item.image}
@@ -124,18 +131,18 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
 
       <section className="mx-auto w-[92%]">
         <p className="leading-[40px]">
-          Listed by {post?.product_detail?.user?.username}
+          Listed by {post && post?.product_detail?.user?.username}
         </p>
 
         <main className="flex flex-col justify-between md:flex-row">
           <div className="w-[90%] md:w-[47%]">
             <section className="flex flex-col gap-y-4">
               <h1 className="text-3xl font-semibold">
-                {post?.product_detail?.title}
+                {post && post?.product_detail?.title}
               </h1>
               <div className="flex gap-4">
                 <Image src={Location} alt="" />
-                <p>{post?.product_detail?.property_location}</p>
+                <p>{post && post?.product_detail?.property_location}</p>
               </div>
               <div className="flex items-center gap-4">
                 <Image src={Star} alt="" />
@@ -147,11 +154,11 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
               <div className="flex items-center gap-6">
                 <div className="flex items-center gap-2">
                   <Image src={Eye} alt="" />
-                  <p>{post?.product_detail?.views} views</p>
+                  <p>{post && post?.product_detail?.views} views</p>
                 </div>{" "}
                 <div className="flex items-center gap-2">
                   <Image src={Calender} alt="" />
-                  <p>{post?.product_detail?.createdAt}</p>
+                  <p>{post && post?.product_detail?.createdAt}</p>
                 </div>
               </div>
             </section>
@@ -161,45 +168,50 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
               <div className="flex flex-col items-center gap-4">
                 <p>Bedroom</p>
                 <Image src={Car2} alt="" />
-                <h1>{post?.product_detail?.number_of_bedrooms} Rooms</h1>
+                <h1>
+                  {post && post?.product_detail?.number_of_bedrooms} Rooms
+                </h1>
               </div>
               <div className="flex flex-col items-center gap-4">
                 <p>Bathroom</p>
                 <Image src={Cart2} alt="" />
-                <h1>{post?.product_detail?.number_of_bathrooms} Baths</h1>
+                <h1>
+                  {post && post?.product_detail?.number_of_bathrooms} Baths
+                </h1>
               </div>
               <div className="flex flex-col items-center gap-4">
                 <p>Square</p>
                 <Image src={El2} alt="" />
-                <h1>{post?.product_detail?.square} m²</h1>
+                <h1>{post && post?.product_detail?.square} m²</h1>
               </div>
               <div className="flex flex-col items-center gap-4">
                 <p>Floors</p>
                 <Image src={Floor} alt="" />
-                <h1>{post?.product_detail?.number_of_floors}</h1>
+                <h1>{post && post?.product_detail?.number_of_floors}</h1>
               </div>
             </section>
             <section className="flex flex-col gap-y-5 pt-10">
               <h1 className="text-3xl font-semibold">Description</h1>
               <p className="leading-[28px]">
-                {post?.product_detail?.description}
+                {post && post?.product_detail?.description}
               </p>
             </section>
             <section>
               <h1>Features</h1>
               <section className="min-h-[200px] shadow-xlarge">
                 <div className="flex flex-wrap items-center gap-y-8 pl-6 pt-14">
-                  {post?.product_detail?.features.map(
-                    (item: string, idx: number) => (
-                      <div
-                        key={idx}
-                        className="flex w-[22%] items-center gap-1"
-                      >
-                        <Image src={Tick} alt="" />
-                        <p>{item}</p>
-                      </div>
-                    ),
-                  )}
+                  {post &&
+                    post?.product_detail?.features.map(
+                      (item: string, idx: number) => (
+                        <div
+                          key={idx}
+                          className="flex w-[22%] items-center gap-1"
+                        >
+                          <Image src={Tick} alt="" />
+                          <p>{item}</p>
+                        </div>
+                      ),
+                    )}
                 </div>
               </section>
             </section>
@@ -320,14 +332,17 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
       <section className="mx-auto mt-8 w-[92%] px-6 pb-14 pt-12 shadow-xlarge ">
         <h1 className="pb-8 text-3xl font-semibold">Amenities</h1>
         <div className="flex flex-wrap gap-x-10 gap-y-11">
-          {post?.product_detail?.amenities?.map((item: string, idx: number) => (
-            <p
-              className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center"
-              key={idx}
-            >
-              {item}
-            </p>
-          ))}
+          {post &&
+            post?.product_detail?.amenities?.map(
+              (item: string, idx: number) => (
+                <p
+                  className="w-[17%] rounded-[7px] bg-[#F2F9FB] py-1 text-center"
+                  key={idx}
+                >
+                  {item}
+                </p>
+              ),
+            )}
         </div>
       </section>
 
@@ -511,38 +526,44 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
           {/* <div className="float-right mr-7 mt-5 flex h-[30px] w-[100px] items-center justify-center bg-[#2C9FD9] text-base font-semibold text-white">
             For Sale
           </div> */}
-          {post?.related_properties.map((item: IPost) => (
-            <div key={item.id} className="mx-2 h-full bg-[#F2F9FB] px-4 py-4 ">
-              <Image
-                src={item.banner}
-                alt=""
-                className="h-[600px] w-full object-cover"
-              />
-              <div className="min-h-[100px] bg-[#F2F9FB] pt-3">
-                <p>{item?.category}</p>
-                <h1 className="text-[16px] font-semibold">{item?.title}</h1>
-                <p>{item?.property_location}</p>
-                <div className=" inner inset text-black-0 flex h-[50px] w-full items-center gap-5  pl-4 text-sm">
-                  <div className="flex items-center gap-1">
-                    <p className="font-sm text-base">
-                      {item?.number_of_bedrooms}
-                    </p>
-                    <Image src={Car2} height={20} width={20} alt="" />
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <p className="font-sm text-base">
-                      {item?.number_of_bathrooms}
-                    </p>
-                    <Image src={Cart2} height={20} width={20} alt="" />
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <p>{item?.square} m²</p>
-                    <Image src={El2} height={20} width={20} alt="" />
+          {post &&
+            post?.related_properties?.map((item: IPost) => (
+              <div
+                key={item?.id}
+                className="mx-2 h-full bg-[#F2F9FB] px-4 py-4 "
+              >
+                <Image
+                  src={item?.banner}
+                  height={60}
+                  width={60}
+                  alt=""
+                  className="h-[600px] w-full object-cover"
+                />
+                <div className="min-h-[100px] bg-[#F2F9FB] pt-3">
+                  <p>{item?.category}</p>
+                  <h1 className="text-[16px] font-semibold">{item?.title}</h1>
+                  <p>{item?.property_location}</p>
+                  <div className=" inner inset text-black-0 flex h-[50px] w-full items-center gap-5  pl-4 text-sm">
+                    <div className="flex items-center gap-1">
+                      <p className="font-sm text-base">
+                        {item?.number_of_bedrooms}
+                      </p>
+                      <Image src={Car2} height={20} width={20} alt="" />
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <p className="font-sm text-base">
+                        {item?.number_of_bathrooms}
+                      </p>
+                      <Image src={Cart2} height={20} width={20} alt="" />
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <p>{item?.square} m²</p>
+                      <Image src={El2} height={20} width={20} alt="" />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </Carousel>
       </section>
       <section className="  mt-22 flex flex-col items-center justify-center gap-y-10 bg-[#F2F9FB] px-6 pb-14 pt-12">

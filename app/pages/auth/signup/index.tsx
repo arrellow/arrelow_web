@@ -40,7 +40,9 @@ const SignUp = () => {
     console.log(data);
     try {
       const res = await signupMutation.mutateAsync(data);
-      setCookie("user", JSON.stringify(res));
+      if (typeof window !== "undefined") {
+        setCookie("user", JSON.stringify(res));
+      }
       toast.success("Sign Up Successful");
       router.push("/pages/dashboard");
     } catch (error) {
