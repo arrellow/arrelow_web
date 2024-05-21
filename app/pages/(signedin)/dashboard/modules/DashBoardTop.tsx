@@ -6,12 +6,16 @@ import cardImage from "@/app/assets/wildcardimage.svg";
 import graph from "@/app/assets/graph.png";
 import doghnurt from "@/app/assets/donught.svg";
 import cardEyeImage from "@/app/assets/cardeye.png";
+import SaveImage from "@/app/assets/total.png";
 import { Bar } from "react-chartjs-2";
 import SmallCard from "../components/SmallCard";
 import { Doughnut } from "react-chartjs-2";
 import { data } from "@/app/components/charts/Doughnut";
 import { options } from "@/app/components/charts/Barchat";
 import { barData } from "@/app/components/charts/Barchat";
+import growthImage from "@/app/assets/growth.png";
+import VisitorImage from "@/app/assets/visitors.png";
+import PageViewImage from "@/app/assets/pageview.png";
 
 const DashBoardTop = () => {
   return (
@@ -38,7 +42,7 @@ const DashBoardTop = () => {
           cardNumber="150"
           cardIcon={<CiSaveDown2 />}
           cardTitle="TOTAL SAVED"
-          cardImage={cardImage}
+          cardImage={SaveImage}
           className="w-[22%]"
         />{" "}
         <WildCard
@@ -46,7 +50,7 @@ const DashBoardTop = () => {
           cardNumber="150"
           cardIcon={<CiSaveDown2 />}
           cardTitle="GROWTH RATE"
-          cardImage={cardImage}
+          cardImage={growthImage}
           className="w-[22%]"
         />
       </section>
@@ -78,13 +82,13 @@ const DashBoardTop = () => {
           className=" min-h-[100px] w-[30%]  px-4 py-6"
         />
         <SmallCard
-          cardImage={cardEyeImage}
+          cardImage={VisitorImage}
           cardText="Sessions"
           cardNumber="500"
           className=" min-h-[100px] w-[30%]  px-4 py-6"
         />
         <SmallCard
-          cardImage={cardEyeImage}
+          cardImage={PageViewImage}
           cardText="Sessions"
           cardNumber="500"
           className=" min-h-[100px] w-[30%]   px-4 py-6"

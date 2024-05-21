@@ -68,7 +68,7 @@ const Nav = () => {
           <p>Property Detail</p>
           <FaArrowRightLong />
         </div>
-        <div className="relative">
+        <div className="relative w-[30%]">
           <TextField
             name="text"
             placeholder="enter your search term"
@@ -80,7 +80,7 @@ const Nav = () => {
                 message: "Matric Number is reuired",
               },
             }}
-            className=" h-[36px] w-[500px] rounded-lg border-[1px] border-black"
+            className=" h-[36px] w-full rounded-lg border-[1px] border-black"
           />
           <IoSearchOutline className="absolute right-4 top-3" />
         </div>
