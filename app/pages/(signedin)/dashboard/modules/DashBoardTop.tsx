@@ -6,7 +6,12 @@ import cardImage from "@/app/assets/wildcardimage.svg";
 import graph from "@/app/assets/graph.png";
 import doghnurt from "@/app/assets/donught.svg";
 import cardEyeImage from "@/app/assets/cardeye.png";
+import { Bar } from "react-chartjs-2";
 import SmallCard from "../components/SmallCard";
+import { Doughnut } from "react-chartjs-2";
+import { data } from "@/app/components/charts/Doughnut";
+import { options } from "@/app/components/charts/Barchat";
+import { barData } from "@/app/components/charts/Barchat";
 
 const DashBoardTop = () => {
   return (
@@ -48,11 +53,11 @@ const DashBoardTop = () => {
       <section className="mt-16 flex items-center gap-6">
         <div className="h-[400px] rounded-md bg-white px-4 py-4 shadow-md md:w-[35%]">
           <p className="font-medium">Daily Inquiry</p>
-          <Image src={doghnurt} alt="" />
+          <Doughnut data={data} redraw={true} />
         </div>
         <div className="h-[400px] rounded-md bg-white px-4 py-4 shadow-md md:w-[35%]">
           <p className="font-medium">Property Stats</p>
-          <Image src={graph} alt="" />
+          <Bar options={options} data={barData} redraw={true} width="100%" />
         </div>
         <div className="rounded-md bg-white px-4 py-4 shadow-md md:w-[30%]">
           <iframe

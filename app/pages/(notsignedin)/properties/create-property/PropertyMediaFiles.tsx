@@ -22,6 +22,7 @@ const PropertyMediaFiles = () => {
             Image <span className="text-[#F6901B]">*</span>
           </label>
           <FileUploader
+
             uploadText={
               "Using button Select Image to add more images. Min of 5, Max of 10."
             }
@@ -35,6 +36,7 @@ const PropertyMediaFiles = () => {
             Banner <span className="text-[#F6901B]">*</span>
           </label>
           <FileUploader
+
             uploadText={"Using button Select Image to add more images."}
           />
         </div>{" "}
@@ -46,6 +48,7 @@ const PropertyMediaFiles = () => {
             Youtube Video Thumbnail <span className="text-[#F6901B]">*</span>
           </label>
           <FileUploader
+          
             uploadText={
               "Using button Choose Image for your  choice of cover clip."
             }
