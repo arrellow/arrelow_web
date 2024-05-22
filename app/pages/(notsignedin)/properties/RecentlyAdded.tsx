@@ -10,9 +10,9 @@ import El from "@/app/assets/el.svg";
 import useGeAllPost from "@/app/services/post-controller/all-post-controller/use-get-all-post";
 import { beautify } from "@/app/utils/helper";
 
-const RecentlyAdded = () => {
+const RecentlyAdded = ({ cat }) => {
   const router = useRouter();
-  const { data: post, isLoading } = useGeAllPost();
+  const { data: post, isLoading } = useGeAllPost({ category: cat });
   console.log(post);
   const handleClick = (Id: any) => {
     router.push(`/pages/properties/${Id}`);

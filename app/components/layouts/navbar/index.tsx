@@ -49,7 +49,7 @@ const NavBar = () => {
     router.push("/pages/auth");
   };
   return (
-    <div className="fixed left-0 top-0 z-10 w-full bg-white py-4 md:pl-11">
+    <div className="fixed left-0 top-0 z-10 w-full bg-white py-4 ">
       <header className="h-[70px] w-full  max-sm:h-[50px] md:px-7">
         <nav
           className={`flex items-center justify-between px-4 md:px-8 md:py-4`}

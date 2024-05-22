@@ -5,11 +5,11 @@ import RecentlyAdded from "./RecentlyAdded";
 import Detached from "./Detached";
 
 const MENU = [
-  { text: "All", content: <RecentlyAdded /> },
-  { text: "Detached", content: <Detached /> },
-  { text: "Duplex", content: <RecentlyAdded /> },
-  { text: "Terraces", content: <RecentlyAdded /> },
-  { text: "Bungalow", content: <RecentlyAdded /> },
+  { text: "All", content: <RecentlyAdded cat={""}/> },
+  { text: "Detached", content: <RecentlyAdded cat= {"detached"} /> },
+  { text: "Duplex", content: <RecentlyAdded cat={ "duplex"} /> },
+  { text: "Terraces", content: <RecentlyAdded cat={"terraces"}/> },
+  { text: "Bungalow", content: <RecentlyAdded cat={"bungalow"}/> },
 ];
 const Related = () => {
   const [activeIdx, setActiveIdx] = useState(0);

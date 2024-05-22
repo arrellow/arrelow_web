@@ -33,7 +33,11 @@ import ArrowDown from "@/app/assets/arrowdown.svg";
 import Prof from "@/app/assets/prof.svg";
 import MyTextArea from "@/app/components/ui/inputs/textarea";
 import useGeSinglePost from "@/app/services/post-controller/single-post-controller/use-get-single-post";
-import { IPost } from "@/app/types/interface";
+import { IPost, InputsContactUs } from "@/app/types/interface";
+import useMutateContactUs from "@/app/services/contactus-controller/use-mutate-contactus";
+import { toast } from "react-toastify";
+import { AxiosError } from "axios";
+import useMutateContactAdmin from "@/app/services/contact-admin-controller/use-mutate-contact-admin";
 
 interface carouselProps {
   id: number;
@@ -70,22 +74,38 @@ interface searchProps {
 }
 
 const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
-  const { register, handleSubmit, control } = useForm<searchProps>();
+  const { register, handleSubmit, control, reset } = useForm<InputsContactUs>();
+  const contactAdminMutation = useMutateContactAdmin();
+  const onSubmit: SubmitHandler<InputsContactUs> = async (data) => {
+    console.log(data);
+
+    try {
+      const res = await contactAdminMutation.mutateAsync(data);
+      console.log(res);
+      reset();
+      toast.success("Message Sent Successfully");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error);
+        toast.error(error?.response?.data?.message);
+      }
+    }
+  };
+
   console.log(params.propertyId);
   const { data: post, isLoading } = useGeSinglePost(params?.propertyId);
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
   if (!post) {
     return <div>No data available</div>;
   }
   console.log(post);
 
   return (
-    <div className="pt-40">
+    <div className="md:pt-40">
       <section className="flex h-[700px] w-full flex-col md:flex-row">
-        <main className="h-full w-full  md:w-[40%] ">
+        <main className="w-full max-md:h-[500px]  md:w-[40%] ">
           <Image src={Image1} alt="" className="h-full w-full object-cover" />
         </main>
         <main className="flex h-full w-full md:w-[60%] md:flex-col">
@@ -101,7 +121,7 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
 
       <section className=" flex h-[250px] items-center bg-[#023C63]">
         <Carousel
-          swipeable={false}
+          swipeable={true}
           draggable={false}
           showDots={true}
           responsive={responsive}
@@ -129,13 +149,13 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
         </Carousel>
       </section>
 
-      <section className="mx-auto w-[92%]">
+      <section className="mx-auto w-[92%] max-md:pt-10">
         <p className="leading-[40px]">
           Listed by {post && post?.product_detail?.user?.username}
         </p>
 
         <main className="flex flex-col justify-between md:flex-row">
-          <div className="w-[90%] md:w-[47%]">
+          <div className="w-[100%] md:w-[47%]">
             <section className="flex flex-col gap-y-4">
               <h1 className="text-3xl font-semibold">
                 {post && post?.product_detail?.title}
@@ -164,7 +184,7 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
             </section>
 
             <h1 className="pt-10 text-3xl font-semibold">Overview</h1>
-            <section className="mt-4 flex min-h-[200px] items-center justify-between px-12 shadow-xlarge">
+            <section className="mt-4 flex min-h-[200px] w-full items-center justify-between px-12 shadow-xlarge">
               <div className="flex flex-col items-center gap-4">
                 <p>Bedroom</p>
                 <Image src={Car2} alt="" />
@@ -197,15 +217,15 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
               </p>
             </section>
             <section>
-              <h1>Features</h1>
-              <section className="min-h-[200px] shadow-xlarge">
+              <h1 className="pt-10 text-3xl font-semibold">Features</h1>
+              <section className="mt-4 min-h-[200px] shadow-xlarge">
                 <div className="flex flex-wrap items-center gap-y-8 pl-6 pt-14">
                   {post &&
                     post?.product_detail?.features.map(
                       (item: string, idx: number) => (
                         <div
                           key={idx}
-                          className="flex w-[22%] items-center gap-1"
+                          className="flex w-[45%] items-center gap-1 sm:w-[30%] md:w-[22%]"
                         >
                           <Image src={Tick} alt="" />
                           <p>{item}</p>
@@ -216,10 +236,7 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
               </section>
             </section>
           </div>
-          <form
-            action=""
-            className="flex w-full flex-col gap-y-6 rounded-[10px] px-7 py-10 shadow-xlarge md:w-[47%]"
-          >
+          <div className="flex w-full flex-col gap-y-6 rounded-[10px] px-7 py-10 shadow-xlarge md:w-[47%]">
             <h1 className="text-[28px] font-semibold">Contact Agent</h1>
             <div className="flex flex-col gap-y-9">
               <div className="flex items-center gap-x-4">
@@ -229,53 +246,55 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
                   <p>123 456 780 LAN</p>
                 </div>
               </div>
+            </div>
+            <form action="" onSubmit={handleSubmit(onSubmit)} className="">
               <main className="flex flex-col gap-y-6">
                 <div>
                   <label htmlFor="">Name</label>
                   <TextField
                     control={control}
-                    name="text"
+                    name="fullname"
                     placeholder="Enter name"
                     type="text"
                     rules={{
                       required: {
                         value: true,
-                        message: "Matric Number is reuired",
+                        message: "Name is reuired",
                       },
                     }}
-                    className="bg-whitw my-0 h-[50px] w-[95%] rounded-lg border-none"
+                    className="bg-whitw my-0 h-[50px] w-[95%] rounded-lg border-[1px] border-[#D1D1D5]"
                   />
                 </div>{" "}
                 <div>
                   <label htmlFor="">Phone</label>
                   <TextField
                     control={control}
-                    name="text"
+                    name="phone_number"
                     placeholder="Enter Phone Number"
                     type="text"
                     rules={{
                       required: {
                         value: true,
-                        message: "Matric Number is reuired",
+                        message: "Phone Number is reuired",
                       },
                     }}
-                    className="bg-whitw my-0 h-[50px] w-[95%] rounded-lg border-none"
+                    className="bg-whitw my-0 h-[50px] w-[95%] rounded-lg  border-[1px] border-[#D1D1D5]"
                   />
                 </div>{" "}
                 <div>
                   <label htmlFor="">Email</label>
                   <TextField
                     control={control}
-                    name="text"
+                    name="email"
                     placeholder="Enter Email"
                     type="text"
                     rules={{
                       required: {
                         value: true,
-                        message: "Matric Number is reuired",
+                        message: "Email is reuired",
                       },
                     }}
-                    className="bg-whitw my-0 h-[50px] w-[95%] rounded-lg border-none"
+                    className="bg-whitw my-0 h-[50px] w-[95%] rounded-lg  border-[1px] border-[#D1D1D5]"
                   />
                 </div>{" "}
                 <div>
@@ -289,7 +308,7 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
                     //   },
                     // }}
                     defaultValue=""
-                    name="text"
+                    name="message"
                     render={({
                       field: { onChange, onBlur, value },
                       formState,
@@ -310,22 +329,22 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
                   variant="add"
                   size="md"
                   disabled={false}
-                  text={"Send Email"}
+                  text={"Contact Agent"}
                   className="h-[50px] w-full"
                 />
-                <div className="flex items-center gap-5">
-                  <span className="flex h-[50px] w-[47%] items-center justify-center gap-2 border-2 border-[#023C63] text-[20px] font-semibold">
-                    <FaPhoneAlt />
-                    Call
-                  </span>
-                  <span className="flex h-[50px] w-[47%] items-center justify-center gap-2 border-2 border-[#023C63]  text-[20px]  font-semibold">
-                    <SiWhatsapp />
-                    Whatsapp
-                  </span>
-                </div>
               </main>
+            </form>
+            <div className="flex items-center justify-between gap-5">
+              <span className="flex h-[50px] w-[47%] items-center justify-center gap-2 border-2 border-[#023C63] text-[20px] font-semibold">
+                <FaPhoneAlt />
+                Call
+              </span>
+              <span className="flex h-[50px] w-[47%] items-center justify-center gap-2 border-2 border-[#023C63]  text-[20px]  font-semibold">
+                <SiWhatsapp />
+                Whatsapp
+              </span>
             </div>
-          </form>
+          </div>
         </main>
       </section>
 
@@ -346,13 +365,13 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
         </div>
       </section>
 
-      <section className=" mx-auto mt-8 w-[92%] px-6 pb-14 pt-12">
-        <div className="w-full rounded-[10px] shadow-xlarge md:w-[45%]">
+      <section className=" mx-auto mt-8 w-[92%] pb-14 pt-12">
+        <div className="w-full rounded-[10px] px-6 shadow-xlarge md:w-[45%]">
           <div className="mx-auto w-full  md:block md:w-[80%]">
             <h1 className=" pb-8 pt-6 text-3xl  font-semibold">Virtual Tour</h1>
             <iframe
-              className="md:w-[500px]"
-              height="315"
+              className="w-full md:w-[500px]"
+              height="400"
               src="https://www.youtube.com/embed/A8AdS92qmhg"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               style={{
@@ -365,8 +384,11 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
         </div>
       </section>
 
-      <section className="  bg-[#F2F9FB] px-6 pb-14 pt-12">
-        <form className="mx-auto mt-8 flex w-[92%] flex-col gap-y-6">
+      <section className="  hidden bg-[#F2F9FB] px-6 pb-14 pt-12">
+        <form
+          className="mx-auto mt-8 flex w-[92%] flex-col gap-y-6"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <h1 className="text-[28px] font-semibold">
             Contact Property Manager
           </h1>
@@ -374,7 +396,7 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
             <label htmlFor="">Name</label>
             <TextField
               control={control}
-              name="text"
+              name="fullname"
               placeholder=""
               type="text"
               rules={{
@@ -391,7 +413,7 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
               <label htmlFor="">Phone Number</label>
               <TextField
                 control={control}
-                name="text"
+                name="phone_number"
                 placeholder=""
                 type="text"
                 rules={{
@@ -407,7 +429,7 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
               <label htmlFor="">Email</label>
               <TextField
                 control={control}
-                name="text"
+                name="email"
                 placeholder=""
                 type="text"
                 rules={{
@@ -424,7 +446,7 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
             <label htmlFor="">Message</label>
             <TextField
               control={control}
-              name="text"
+              name="message"
               placeholder="I am interested in this property"
               type="text"
               rules={{
@@ -446,8 +468,8 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
         </form>
       </section>
 
-      <section className=" mx-auto mt-8 w-[92%] pb-14 pt-12 md:px-6">
-        <div className="w-full rounded-[10px] py-8 shadow-xlarge md:w-[45%]">
+      <section className=" mx-auto mt-8 w-[92%] pb-14 pt-12">
+        <div className="w-full rounded-[10px] px-6 py-8 shadow-xlarge md:w-[45%]">
           <div className="mx-auto flex w-full flex-col gap-y-9 md:w-[80%]">
             <h1 className=" text-[28px]  font-semibold">Comments</h1>
             <div className="flex flex-col gap-y-4">
@@ -470,7 +492,7 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
                   variant="add"
                   size="md"
                   disabled={false}
-                  text={"Contact Agent"}
+                  text={"Comment"}
                   className="h-[50px] w-[40%]"
                 />
               </div>
@@ -506,7 +528,52 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
       </section>
       <section className=" relative  px-6 pb-14 pt-12">
         <h1 className="text-3xl font-extrabold">Related Properties</h1>
-        <Carousel
+
+        {/* <div className="float-right mr-7 mt-5 flex h-[30px] w-[100px] items-center justify-center bg-[#2C9FD9] text-base font-semibold text-white">
+            For Sale
+          </div> */}
+        <div className="flex justify-between gap-6 max-md:flex-col">
+          {post &&
+            post?.related_properties?.map((item: IPost) => (
+              <div
+                key={item?.id}
+                className="mx-2 h-full bg-[#F2F9FB] px-4 py-4 md:w-[30%]"
+              >
+                <Image
+                  src={item?.banner}
+                  height={60}
+                  width={60}
+                  alt=""
+                  className="h-[600px] w-full object-cover"
+                />
+                <div className="min-h-[100px] bg-[#F2F9FB] pt-3">
+                  <p>{item?.category}</p>
+                  <h1 className="text-[16px] font-semibold">{item?.title}</h1>
+                  <p>{item?.property_location}</p>
+                  <div className=" inner inset text-black-0 flex h-[50px] w-full items-center gap-5  pl-4 text-sm">
+                    <div className="flex items-center gap-1">
+                      <p className="font-sm text-base">
+                        {item?.number_of_bedrooms}
+                      </p>
+                      <Image src={Car2} height={20} width={20} alt="" />
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <p className="font-sm text-base">
+                        {item?.number_of_bathrooms}
+                      </p>
+                      <Image src={Cart2} height={20} width={20} alt="" />
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <p>{item?.square} m²</p>
+                      <Image src={El2} height={20} width={20} alt="" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+        </div>
+
+        {/* <Carousel
           swipeable={false}
           draggable={false}
           showDots={true}
@@ -521,11 +588,8 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
           removeArrowOnDeviceType={["tablet", "mobile"]}
           dotListClass="custom-dot-list-style"
           itemClass="carousel-item-padding-40-px"
-          className="min-h-[600px] "
+          className="min-h-[600px]"
         >
-          {/* <div className="float-right mr-7 mt-5 flex h-[30px] w-[100px] items-center justify-center bg-[#2C9FD9] text-base font-semibold text-white">
-            For Sale
-          </div> */}
           {post &&
             post?.related_properties?.map((item: IPost) => (
               <div
@@ -564,7 +628,7 @@ const ViewMoreProperty = ({ params }: { params: { propertyId: string } }) => {
                 </div>
               </div>
             ))}
-        </Carousel>
+        </Carousel> */}
       </section>
       <section className="  mt-22 flex flex-col items-center justify-center gap-y-10 bg-[#F2F9FB] px-6 pb-14 pt-12">
         <div className="flex flex-col gap-y-4">

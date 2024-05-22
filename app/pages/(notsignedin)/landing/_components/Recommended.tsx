@@ -11,6 +11,7 @@ import Cart from "@/app/assets/cart.svg";
 import { beautify } from "@/app/utils/helper";
 import { Card } from "@/app/components/cards";
 import useGeAllRecommendedPost from "@/app/services/post-controller/all-recommended-controller/use-get-all-recommended";
+import useGeAllPost from "@/app/services/post-controller/all-post-controller/use-get-all-post";
 
 const CardContent = [
   {
@@ -59,7 +60,7 @@ const CardContent = [
 ];
 
 const Recommended = () => {
-  const { data: post, isLoading } = useGeAllRecommendedPost();
+  const { data: post, isLoading } = useGeAllPost({categoy: "recommend"});
   console.log("Recommended is", post);
   return (
     <div className=" pt-[110px]  ">
