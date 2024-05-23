@@ -92,7 +92,7 @@ const Recommended = () => {
                 </div>
               </div>
               {isLoading ? (
-                <div className="flex items-center justify-center w-full">
+                <div className="flex w-full items-center justify-center">
                   <ComponentLoader />
                 </div>
               ) : post?.length > 0 ? (
@@ -154,7 +154,9 @@ const Recommended = () => {
                   </div>
                 ))
               ) : (
-                <p>No data is available</p>
+                <div className="flex w-full items-center justify-center">
+                  <p>No data is available</p>
+                </div>
               )}
             </div>
           </ScrollingBar>
