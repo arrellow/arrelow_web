@@ -11,10 +11,11 @@ import El from "@/app/assets/el.svg";
 import useGeAllPost from "@/app/services/post-controller/all-post-controller/use-get-all-post";
 import { beautify } from "@/app/utils/helper";
 import Pagination from "@/app/components/ui/pagination";
+import ComponentLoader from "@/app/components/loader/ComponentLoader";
 
 const RecentlyAdded = () => {
   const router = useRouter();
-  const { data: post, isLoading } = useGeAllPost({category: ""});
+  const { data: post, isLoading } = useGeAllPost({ category: "" });
   const handleClick = (Id: any) => {
     router.push(`/pages/properties/${Id}`);
   };
@@ -25,7 +26,9 @@ const RecentlyAdded = () => {
       </header>
       <div className="flex flex-wrap justify-around gap-y-5  overflow-hidden py-10 ">
         {isLoading ? (
-          "Data is loading"
+          <div className="flex items-center justify-center">
+            <ComponentLoader />
+          </div>
         ) : post?.length > 0 ? (
           post?.map((item: any, idx: any) => (
             <div

@@ -12,6 +12,7 @@ import { beautify } from "@/app/utils/helper";
 import { Card } from "@/app/components/cards";
 import useGeAllRecommendedPost from "@/app/services/post-controller/all-recommended-controller/use-get-all-recommended";
 import useGeAllPost from "@/app/services/post-controller/all-post-controller/use-get-all-post";
+import ComponentLoader from "@/app/components/loader/ComponentLoader";
 
 const CardContent = [
   {
@@ -60,7 +61,7 @@ const CardContent = [
 ];
 
 const Recommended = () => {
-  const { data: post, isLoading } = useGeAllPost({categoy: "recommend"});
+  const { data: post, isLoading } = useGeAllPost({ categoy: "recommend" });
   console.log("Recommended is", post);
   return (
     <div className=" pt-[110px]  ">
@@ -91,7 +92,9 @@ const Recommended = () => {
                 </div>
               </div>
               {isLoading ? (
-                "data is loading"
+                <div className="flex items-center justify-center w-full">
+                  <ComponentLoader />
+                </div>
               ) : post?.length > 0 ? (
                 post?.map((item: any, idx: any) => (
                   <div key={idx}>

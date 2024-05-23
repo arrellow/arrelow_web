@@ -11,6 +11,7 @@ import Cart from "@/app/assets/cart.svg";
 import { Card } from "@/app/components/cards";
 import useGeAllRecommendedPost from "@/app/services/post-controller/all-recommended-controller/use-get-all-recommended";
 import { beautify } from "@/app/utils/helper";
+import ComponentLoader from "@/app/components/loader/ComponentLoader";
 
 const CardContent = [
   {
@@ -89,63 +90,71 @@ const Recommended = () => {
                   </p>
                 </div>
               </div>
-              {post?.map((item: any, idx: any) => (
-                <div key={idx}>
-                  <Card
-                    isBackground
-                    backgroundImage={item.banner}
-                    className=" relative w-96 gap-4 overflow-hidden"
-                  >
-                    <div className="float-right mr-7 mt-5 flex h-[30px] w-[100px] items-center justify-center bg-[#2C9FD9] text-base font-semibold text-white">
-                      Selling
-                    </div>
-                    <div className="absolute bottom-0  w-full rounded-small">
-                      <div className="flex">
-                        <div className="flex h-[35px] w-[120px] items-center justify-center bg-[#023C63] text-center text-white">
-                          <span>&#8358;{beautify(item.price)}</span>
-                        </div>
-                        <div className="flex h-[35px] w-[120px] items-center justify-center rounded-tr-[33.42px] bg-[#FEFEFE] text-center">
-                          <span>{item.category}</span>
-                        </div>
+              {isLoading ? (
+                <div className="flex w-full items-center justify-center">
+                  <ComponentLoader />
+                </div>
+              ) : post?.length > 0 ? (
+                post?.map((item: any, idx: any) => (
+                  <div key={idx}>
+                    <Card
+                      isBackground
+                      backgroundImage={item.banner}
+                      className=" relative w-96 gap-4 overflow-hidden"
+                    >
+                      <div className="float-right mr-7 mt-5 flex h-[30px] w-[100px] items-center justify-center bg-[#2C9FD9] text-base font-semibold text-white">
+                        Selling
                       </div>
-                      <div className="flex min-h-[50px] w-full justify-between bg-white  px-4 py-3 pb-2 opacity-70">
-                        <div>
-                          <h4 className="text-[24px] font-bold leading-[30px] tracking-[-4%] text-[#023C63]">
-                            {item.number_of_bedrooms} Bedroom Terrace
-                          </h4>
-                          <div className="flex items-center gap-3">
-                            <Image
-                              src={Location}
-                              height={20}
-                              width={20}
-                              alt=""
-                            />
-                            <p className="text-[17px] font-normal tracking-tight">
-                              {item.property_location}
-                            </p>
+                      <div className="absolute bottom-0  w-full rounded-small">
+                        <div className="flex">
+                          <div className="flex h-[35px] w-[120px] items-center justify-center bg-[#023C63] text-center text-white">
+                            <span>&#8358;{beautify(item.price)}</span>
+                          </div>
+                          <div className="flex h-[35px] w-[120px] items-center justify-center rounded-tr-[33.42px] bg-[#FEFEFE] text-center">
+                            <span>{item.category}</span>
                           </div>
                         </div>
-                        <div>
-                          <Image src={Love} height={20} width={20} alt="" />
-                          <p>1,000</p>
+                        <div className="flex min-h-[50px] w-full justify-between bg-white  px-4 py-3 pb-2 opacity-70">
+                          <div>
+                            <h4 className="text-[24px] font-bold leading-[30px] tracking-[-4%] text-[#023C63]">
+                              {item.number_of_bedrooms} Bedroom Terrace
+                            </h4>
+                            <div className="flex items-center gap-3">
+                              <Image
+                                src={Location}
+                                height={20}
+                                width={20}
+                                alt=""
+                              />
+                              <p className="text-[17px] font-normal tracking-tight">
+                                {item.property_location}
+                              </p>
+                            </div>
+                          </div>
+                          <div>
+                            <Image src={Love} height={20} width={20} alt="" />
+                            <p>1,000</p>
+                          </div>
+                        </div>
+                        <div className=" inner inset-0 flex h-[50px] w-full items-center gap-10 bg-[#7F8184]  bg-cover pl-4 text-sm font-normal text-white">
+                          <span className="text-base font-normal">
+                            {item?.number_of_floors}
+                          </span>
+                          <div className="flex items-center gap-3">
+                            <p className="text-base font-normal">
+                              {item.number_of_bathrooms}
+                            </p>
+                            <Image src={Cart} height={30} width={30} alt="" />
+                            <p>{item.square} m²</p>
+                          </div>
                         </div>
                       </div>
-                      <div className=" inner inset-0 flex h-[50px] w-full items-center gap-10 bg-[#7F8184]  bg-cover pl-4 text-sm font-normal text-white">
-                        <span className="text-base font-normal">
-                          {item?.number_of_floors}
-                        </span>
-                        <div className="flex items-center gap-3">
-                          <p className="text-base font-normal">
-                            {item.number_of_bathrooms}
-                          </p>
-                          <Image src={Cart} height={30} width={30} alt="" />
-                          <p>{item.square} m²</p>
-                        </div>
-                      </div>
-                    </div>
-                  </Card>
-                </div>
-              ))}
+                    </Card>
+                  </div>
+                ))
+              ) : (
+                <p>No data is available</p>
+              )}
             </div>
           </ScrollingBar>
         </div>
