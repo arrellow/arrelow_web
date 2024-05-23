@@ -14,7 +14,7 @@ import Pagination from "@/app/components/ui/pagination";
 
 const RecentlyAdded = () => {
   const router = useRouter();
-  const { data: post, isLoading } = useGeAllPost();
+  const { data: post, isLoading } = useGeAllPost({category: ""});
   const handleClick = (Id: any) => {
     router.push(`/pages/properties/${Id}`);
   };

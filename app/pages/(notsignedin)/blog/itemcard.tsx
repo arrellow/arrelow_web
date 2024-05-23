@@ -157,8 +157,8 @@ const ItemCard = () => {
     router.push(`/pages/blog/${blogId}`);
   };
   return (
-    <div>
-      <div className="grid gap-y-16 md:grid-cols-3 md:px-24">
+    <div className="max-md:px-4">
+      <div className="grid gap-y-16 md:grid-cols-3 sm:grid-cols-2 gap-x-8 md:px-24">
         {currentData.map((item, idx) => (
           <div
             key={idx}
@@ -169,7 +169,7 @@ const ItemCard = () => {
               <Image
                 src={item.img}
                 alt=""
-                className=" h-[300px] object-cover"
+                className=" md:h-[300px] max-md:w-full object-cover"
               />
             </div>
             <div className="px-4 py-5">
