@@ -26,7 +26,7 @@ export default function RootLayout({
             <Nav />
           </div>
           <section className="flex h-full">
-            <div className="w-[15%]">
+            <div className="mt-10 w-[15%]">
               <SideBar />
             </div>
             <div className="no-scrollbar  h-full w-[85%]  overflow-scroll ">
