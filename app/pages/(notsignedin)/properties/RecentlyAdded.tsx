@@ -29,9 +29,9 @@ const RecentlyAdded = ({ cat }: any) => {
         ) : post?.length > 0 ? (
           post?.map((item: any, idx: any) => (
             <div
-              key={idx}
+              key={item.idx}
               className=" w-[95%] cursor-pointer md:w-[23%]"
-              onClick={() => handleClick(idx)}
+              onClick={() => handleClick(item.id)}
             >
               <Card
                 isBackground
