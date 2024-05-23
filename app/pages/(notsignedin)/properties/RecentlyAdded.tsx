@@ -10,7 +10,7 @@ import El from "@/app/assets/el.svg";
 import useGeAllPost from "@/app/services/post-controller/all-post-controller/use-get-all-post";
 import { beautify } from "@/app/utils/helper";
 
-const RecentlyAdded = ({ cat }) => {
+const RecentlyAdded = ({ cat }: any) => {
   const router = useRouter();
   const { data: post, isLoading } = useGeAllPost({ category: cat });
   console.log(post);
