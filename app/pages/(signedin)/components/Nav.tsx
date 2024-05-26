@@ -54,7 +54,7 @@ const Nav = () => {
   return (
     <div>
       <ToastContainer />
-      <section className="flex items-center justify-between px-9">
+      <section className="flex items-center justify-between px-9 py-4">
         <div>
           <Image
             src={LandingLogo}

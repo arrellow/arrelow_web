@@ -26,12 +26,11 @@ export default function RootLayout({
             <Nav />
           </div>
           <section className="flex h-full">
-            <div className="mt-10 w-[15%]">
+            <div className="w-[15%]">
               <SideBar />
             </div>
-            <div className="no-scrollbar  h-full w-[85%]  overflow-scroll ">
+            <div className="no-scrollbar  h-full w-[85%]  overflow-scroll bg-[#FAF9FF]  pb-20">
               <div className="pt-20">{children}</div>
-              <Footer />
             </div>
           </section>
         </div>

@@ -11,8 +11,8 @@ const WildCard = ({
   className,
 }: any) => {
   return (
-    <main className={` bg-white px-10 py-10 shadow-md rounded-md ${className}`}>
-      <section className="flex flex-col gap-y-6">
+    <main className={` bg-white px-6 py-6 shadow-md rounded-md transition-all duration-200 ease-linear hover:scale-105 ${className}`}>
+      <section className="flex flex-col gap-y-6 h-full justify-between">
         <div>
           <div className="flex items-center justify-between">
             <p>{cardText}</p>

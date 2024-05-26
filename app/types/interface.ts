@@ -111,3 +111,8 @@ export interface InputsContactUs {
   message: string;
   requestPayload: any;
 }
+
+export interface PropertiesProps{
+  main: string;
+  stat: string;
+}

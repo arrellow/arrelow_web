@@ -1,5 +1,5 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { MessageData } from "@/app/lib/constants";
+import { MessageData, PropertiesTable } from "@/app/lib/constants";
 import Table from "@/app/components/tables/Table";
 
 const DAshboardBottom = () => {
@@ -14,24 +14,30 @@ const DAshboardBottom = () => {
       },
       enableHiding: false,
     },
-    columnHelper.accessor("messageHeader", {
-      header: "Name Of Organizatiin",
+    columnHelper.accessor("main", {
+      header: "URL",
     }),
-    columnHelper.accessor("messageParagraph", {
-      header: "Organization Description",
-    }),
-    columnHelper.accessor("messageRead", {
-      header: "Organization Description",
+    columnHelper.accessor("stat", {
+      header: "VIEWS",
     }),
   ];
 
   return (
-    <div className="mt-12">
-      <Table
-        data={MessageData}
-        columns={columns}
-        className="border-primary border-[1px]"
-      />
+    <div className="mt-12 flex flex-col justify-between gap-6 md:flex-row">
+      <div className="w-full md:w-[50%]">
+        <Table
+          data={PropertiesTable}
+          columns={columns}
+          className="border-[1px] border-[rgba(0,0,0,0.1)]"
+        />
+      </div>
+      <div className="w-full md:w-[50%]">
+        <Table
+          data={PropertiesTable}
+          columns={columns}
+          className="border-[1px] border-[rgba(0,0,0,0.1)]"
+        />
+      </div>
     </div>
   );
 };

@@ -33,7 +33,7 @@ const RecentlyAdded = () => {
           post?.map((item: any, idx: any) => (
             <div
               key={idx}
-              className=" w-[95%] cursor-pointer md:w-[23%]"
+              className=" w-[95%] cursor-pointer md:w-[23%] hover:scale-[102%] transition-all duration-200 ease-linear"
               onClick={() => handleClick(idx)}
             >
               <Card

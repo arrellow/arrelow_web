@@ -1,4 +1,4 @@
-import { MessageProps, MessagePropsWithStats } from "../types/interface";
+import { MessageProps, MessagePropsWithStats, PropertiesProps,} from "../types/interface";
 import { Status } from "../types/enum";
 
 export const MessageData: MessageProps[] = [
@@ -122,3 +122,30 @@ export const MessageDataWithStats: MessagePropsWithStats[] = [
     status: Status.Approved,
   },
 ];
+
+export const PropertiesTable: PropertiesProps[] = [
+  {
+    main: "One Storey Duplex in Enugu",
+    stat: "84"
+  },
+  {
+    main: "One Bungalow in Anambra",
+    stat: "8"
+  },
+  {
+    main: "Semi-detached flat in Lagos",
+    stat: "30"
+  },
+  {
+    main: "Abuja Building, UNN",
+    stat: "84"
+  },
+  {
+    main: "Gerow - Business Consulting",
+    stat: "84"
+  },
+  {
+    main: "anything....",
+    stat: "84"
+  },
+]

@@ -35,7 +35,7 @@ const Availability = () => {
             key={idx}
             isBackground
             backgroundImage={item.bg.src}
-            className="w-full text-center"
+            className="w-full text-center transition-all duration-200 ease-linear hover:scale-[102%]"
           >
             <h2 className="pt-10 font-bold leading-[20%]">{item.text}</h2>
           </Card>

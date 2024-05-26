@@ -28,7 +28,7 @@ const Table = ({ columns, data, className }: any) => {
         onChange={(e: any) => setFiltering(e.target.value)}
       /> */}
       <table
-        className={` min-h-[600px] w-full  ${styles.table} ${className} `}
+        className={` w-full  ${styles.table} ${className} `}
       >
         <thead className="px-4">
           {table.getHeaderGroups().map((headerGroup) => {
@@ -39,7 +39,7 @@ const Table = ({ columns, data, className }: any) => {
                     <th
                       id={header.id}
                       key={header.id}
-                      className="pl-12 pt-6 text-left"
+                      className="pl-12 pt-6 text-center"
                     >
                       {header.isPlaceholder
                         ? null
@@ -60,7 +60,7 @@ const Table = ({ columns, data, className }: any) => {
               <tr key={row.id}>
                 {row.getVisibleCells().map((cell) => {
                   return (
-                    <td key={cell.id} className="pl-12">
+                    <td key={cell.id} className="pl-12 py-6 border-y-[0.5px] border-[rgba(0,0,0,0.1)]">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext(),

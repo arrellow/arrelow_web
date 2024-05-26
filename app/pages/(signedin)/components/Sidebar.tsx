@@ -110,7 +110,7 @@ function SideNavbar() {
                 {/* <div className="pb-7 pt-7">
                   <Image src={Logo} alt="" />
                 </div> */}
-                <div className="my-4 flex flex-col gap-y-8 border-b border-gray-100">
+                <div className=" mt-28 flex flex-col">
                   {navList.map((menu, idx) => (
                     <Link
                       key={idx}
@@ -120,10 +120,10 @@ function SideNavbar() {
                       }}
                     >
                       <div
-                        className={`group m-auto mb-2 flex cursor-pointer items-center justify-start gap-4 rounded-md p-2 pl-5 ${
+                        className={`group m-auto flex cursor-pointer items-center justify-start gap-4 py-6 pl-5 font-bold transition-all duration-200 ease-linear ${
                           pathname === menu.link || activeLink === menu.link
-                            ? "bg-white text-gray-600 shadow-lg"
-                            : "text-white hover:bg-white hover:text-gray-600 hover:shadow-lg"
+                            ? "bg-[#d9d9d933] text-white shadow-lg"
+                            : "text-white hover:bg-[#d9d9d933]  hover:shadow-lg"
                         }`}
                       >
                         <p>{menu.icon}</p>

@@ -20,14 +20,14 @@ import PageViewImage from "@/app/assets/pageview.png";
 const DashBoardTop = () => {
   return (
     <main className=" mb-12 mt-7 border-[1px] border-primary px-7 py-7">
-      <section className="mt-6 flex items-center justify-between ">
+      <section className="mt-6 grid items-center grid-col grid-cols-4 gap-4 md:gap-6">
         <WildCard
           cardText="Properties"
           cardNumber="150"
           cardIcon={<CiSaveDown2 />}
           cardTitle="ALL PROPERTIES"
           cardImage={cardImage}
-          className="w-[22%]"
+          className=""
         />{" "}
         <WildCard
           cardText="Properties"
@@ -35,7 +35,7 @@ const DashBoardTop = () => {
           cardIcon={<CiSaveDown2 />}
           cardTitle="TOTAL SAVED"
           cardImage={cardImage}
-          className="w-[22%]"
+          className="h-full"
         />{" "}
         <WildCard
           cardText="Properties"
@@ -43,7 +43,7 @@ const DashBoardTop = () => {
           cardIcon={<CiSaveDown2 />}
           cardTitle="TOTAL SAVED"
           cardImage={SaveImage}
-          className="w-[22%]"
+          className="h-full"
         />{" "}
         <WildCard
           cardText="Properties"
@@ -51,19 +51,19 @@ const DashBoardTop = () => {
           cardIcon={<CiSaveDown2 />}
           cardTitle="GROWTH RATE"
           cardImage={growthImage}
-          className="w-[22%]"
+          className="h-full"
         />
       </section>
-      <section className="mt-16 flex items-center gap-6">
-        <div className="h-[400px] rounded-md bg-white px-4 py-4 shadow-md md:w-[35%]">
+      <section className="mt-16 flex gap-6">
+        <div className="h-[500px] rounded-md bg-white px-4 py-4 shadow-md md:w-[30%]">
           <p className="font-medium">Daily Inquiry</p>
           <Doughnut data={data} redraw={true} />
         </div>
-        <div className="h-[400px] rounded-md bg-white px-4 py-4 shadow-md md:w-[35%]">
+        <div className="h-[500px] rounded-md bg-white px-4 py-4 shadow-md md:w-[30%]">
           <p className="font-medium">Property Stats</p>
           <Bar options={options} data={barData} redraw={true} width="100%" />
         </div>
-        <div className="rounded-md bg-white px-4 py-4 shadow-md md:w-[30%]">
+        <div className="rounded-md bg-white p-2 shadow-md md:w-[40%]">
           <iframe
             width="100%"
             height="500px"
@@ -79,19 +79,19 @@ const DashBoardTop = () => {
           cardImage={cardEyeImage}
           cardText="Sessions"
           cardNumber="500"
-          className=" min-h-[100px] w-[30%]  px-4 py-6"
+          className=" min-h-[100px] w-[30%] px-4 py-6"
         />
         <SmallCard
           cardImage={VisitorImage}
-          cardText="Sessions"
+          cardText="Visitors"
           cardNumber="500"
-          className=" min-h-[100px] w-[30%]  px-4 py-6"
+          className=" min-h-[100px] w-[30%] px-4 py-6"
         />
         <SmallCard
           cardImage={PageViewImage}
-          cardText="Sessions"
+          cardText="Page Views"
           cardNumber="500"
-          className=" min-h-[100px] w-[30%]   px-4 py-6"
+          className=" min-h-[100px] w-[30%] px-4 py-6"
         />
       </section>
     </main>
