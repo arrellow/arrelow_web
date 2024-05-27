@@ -6,6 +6,7 @@ const greyBg: string =
   "bg-[#f6f4f4] text-[#948d8d] p-6 border-[0.5px] border-[#948D8D] rounded-[10px] w-full my-6";
 
 const CreatePost = () => {
+  const [propertyImages, setPropertyImages] = useState<any>([])
   const [showDetails, setShowDetails] = useState<boolean>(false)
   return (
     <div>
@@ -93,8 +94,8 @@ const CreatePost = () => {
               className={`${greyBg}`}
             />
           </div>
-          <div className={`${showDetails && "h-0 overflow-hidden"}`}>
-            <div className="">
+          <div className={`${showDetails && "h-0 overflow-hidden"} `}>
+            <div className={`${greyBg} text-center`}>
               <MdAddAPhoto className="text-[5rem] text-[#948D8D]" />
             </div>
           </div>
